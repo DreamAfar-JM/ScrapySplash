@@ -27,10 +27,10 @@ class JdPhoneSpider(scrapy.Spider):
         # yield SplashRequest(self.start_url, endpoint='execute', args={'lua_source': lua_script}, cache_args=['lua_source'])
 
     def parse_urls(self,response):
-        # total = int(response.css('span.p-skip em b::text').extract_first()) + 1
-        total  = int(response.css('div#J_topPage i::text').extract_first()) + 1
-        #page_num = total // 60 + (1 if total % 60 else 0)
-        for i in range(total):
+        total = int(response.css('span#J_resCount::text').re_first('(\d+)')) + 1
+        #total  = int(response.css('div#J_topPage i::text').extract_first()) + 1
+        page_num = total // 60 + (1 if total % 60 else 0)
+        for i in range(page_num):
             url = "%s&page=%s" %(self.base_url, 2*i+1)
             yield SplashRequest(url, endpoint='execute', args={'images':0, 'lua_source': lua_script}, cache_args=['lua_source'])
     def parse(self, response):

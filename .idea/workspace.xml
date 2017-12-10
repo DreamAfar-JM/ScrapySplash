@@ -4,7 +4,11 @@
     <bookmark url="file://$PROJECT_DIR$/ArticleSpider/pipelines.py" line="56" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ccfe83a0-2724-45da-9570-4cb1f9700a6d" name="Default" comment="" />
+    <list default="true" id="ccfe83a0-2724-45da-9570-4cb1f9700a6d" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ArticleSpider/items.py" afterPath="$PROJECT_DIR$/ArticleSpider/items.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ArticleSpider/spiders/jd_phone.py" afterPath="$PROJECT_DIR$/ArticleSpider/spiders/jd_phone.py" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -29,7 +33,7 @@
     <SUITE FILE_PATH="coverage/ArticleSpider$middlewares.coverage" NAME="middlewares Coverage Results" MODIFIED="1496909047588" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ArticleSpider" />
     <SUITE FILE_PATH="coverage/ArticleSpider$lagou.coverage" NAME="lagou Coverage Results" MODIFIED="1495544773029" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ArticleSpider/spiders" />
     <SUITE FILE_PATH="coverage/ArticleSpider$jobbole.coverage" NAME="jobbole Coverage Results" MODIFIED="1497517036616" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ArticleSpider/spiders" />
-    <SUITE FILE_PATH="coverage/ArticleSpider$main.coverage" NAME="main Coverage Results" MODIFIED="1512746952819" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/ArticleSpider$main.coverage" NAME="main Coverage Results" MODIFIED="1512871272496" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/ArticleSpider$settings.coverage" NAME="settings Coverage Results" MODIFIED="1495421682170" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ArticleSpider" />
   </component>
   <component name="CreatePatchCommitExecutor">
@@ -40,13 +44,11 @@
       <file leaf-file-name="pipelines.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ArticleSpider/pipelines.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="247">
-              <caret line="52" column="40" lean-forward="false" selection-start-line="52" selection-start-column="40" selection-end-line="52" selection-end-column="40" />
+            <state relative-caret-position="912">
+              <caret line="52" column="38" lean-forward="false" selection-start-line="52" selection-start-column="38" selection-end-line="52" selection-end-column="38" />
               <folding>
                 <element signature="e#25#75#0" expanded="true" />
-                <marker date="1512712154418" expanded="true" signature="551:722" ph="insert into phone_list... " />
-                <marker date="1512712154418" expanded="true" signature="721:722" ph="insert into JobBole... " />
-                <marker date="1512712154418" expanded="true" signature="1846:1977" ph="insert into JobBole... " />
+                <marker date="1512749245918" expanded="true" signature="551:722" ph="insert into phone_list... " />
               </folding>
             </state>
           </provider>
@@ -55,8 +57,8 @@
       <file leaf-file-name="middlewares.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ArticleSpider/middlewares.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1324">
-              <caret line="83" column="0" lean-forward="true" selection-start-line="83" selection-start-column="0" selection-end-line="83" selection-end-column="0" />
+            <state relative-caret-position="1520">
+              <caret line="83" column="0" lean-forward="false" selection-start-line="83" selection-start-column="0" selection-end-line="83" selection-end-column="0" />
               <folding>
                 <element signature="e#168#194#0" expanded="true" />
               </folding>
@@ -64,14 +66,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="jd_phone.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="jd_phone.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ArticleSpider/spiders/jd_phone.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="117">
-              <caret line="37" column="47" lean-forward="true" selection-start-line="37" selection-start-column="47" selection-end-line="37" selection-end-column="47" />
-              <folding>
-                <element signature="e#24#37#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="110">
+              <caret line="29" column="72" lean-forward="false" selection-start-line="29" selection-start-column="72" selection-end-line="29" selection-end-column="72" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -79,7 +79,7 @@
       <file leaf-file-name="request.py" pinned="false" current-in-tab="false">
         <entry file="file://C:/install/python/Lib/site-packages/scrapy_splash/request.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="200">
+            <state relative-caret-position="361">
               <caret line="24" column="17" lean-forward="false" selection-start-line="24" selection-start-column="17" selection-end-line="24" selection-end-column="17" />
               <folding />
             </state>
@@ -89,29 +89,15 @@
       <file leaf-file-name="items.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ArticleSpider/items.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="149">
-              <caret line="408" column="27" lean-forward="true" selection-start-line="408" selection-start-column="27" selection-end-line="408" selection-end-column="27" />
+            <state relative-caret-position="429">
+              <caret line="305" column="15" lean-forward="false" selection-start-line="305" selection-start-column="14" selection-end-line="305" selection-end-column="15" />
               <folding>
-                <element signature="e#151#167#0" expanded="true" />
-                <element signature="e#943#1024#0" expanded="false" />
-                <element signature="e#1051#1766#0" expanded="false" />
-                <element signature="e#1791#2005#0" expanded="false" />
-                <element signature="e#2048#2614#0" expanded="false" />
-                <element signature="e#2639#2869#0" expanded="false" />
-                <element signature="e#2901#3040#0" expanded="false" />
-                <element signature="e#3070#3689#0" expanded="false" />
-                <element signature="e#3940#5817#0" expanded="false" />
-                <element signature="e#4598#5155#0" expanded="false" />
-                <element signature="e#5194#5817#0" expanded="false" />
-                <element signature="e#5859#7171#0" expanded="false" />
-                <element signature="e#7215#8807#0" expanded="false" />
-                <element signature="e#8844#12536#0" expanded="false" />
-                <marker date="1512746334141" expanded="true" signature="4651:4943" ph="insert into JobBole... " />
-                <marker date="1512746334141" expanded="true" signature="6240:6621" ph="insert into zhihu_answer... " />
-                <marker date="1512746334141" expanded="true" signature="7584:7994" ph="insert into zhihu_question... " />
-                <marker date="1512746334141" expanded="true" signature="10497:11015" ph="insert into LaGou... " />
-                <marker date="1512746334141" expanded="true" signature="14786:15293" ph="insert into ZhiLian... " />
-                <marker date="1512746334141" expanded="true" signature="17125:17194" ph="insert into phone_list... " />
+                <marker date="1512833192360" expanded="true" signature="4651:4943" ph="insert into JobBole... " />
+                <marker date="1512833192360" expanded="true" signature="6240:6621" ph="insert into zhihu_answer... " />
+                <marker date="1512833192360" expanded="true" signature="7584:7994" ph="insert into zhihu_question... " />
+                <marker date="1512833192360" expanded="true" signature="10497:11015" ph="insert into LaGou... " />
+                <marker date="1512833192360" expanded="true" signature="14788:15295" ph="insert into ZhiLian... " />
+                <marker date="1512833192360" expanded="true" signature="17127:17196" ph="insert into phone_list... " />
               </folding>
             </state>
           </provider>
@@ -120,7 +106,7 @@
       <file leaf-file-name="zhihu.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ArticleSpider/spiders/zhihu.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-665">
+            <state relative-caret-position="475">
               <caret line="34" column="24" lean-forward="false" selection-start-line="34" selection-start-column="24" selection-end-line="34" selection-end-column="24" />
               <folding />
             </state>
@@ -142,18 +128,18 @@
       <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="266">
-              <caret line="15" column="42" lean-forward="true" selection-start-line="15" selection-start-column="42" selection-end-line="15" selection-end-column="42" />
+            <state relative-caret-position="323">
+              <caret line="18" column="0" lean-forward="true" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="settings.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ArticleSpider/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="341">
-              <caret line="161" column="2" lean-forward="false" selection-start-line="161" selection-start-column="2" selection-end-line="161" selection-end-column="2" />
+            <state relative-caret-position="299">
+              <caret line="161" column="63" lean-forward="false" selection-start-line="161" selection-start-column="63" selection-end-line="161" selection-end-column="63" />
               <folding />
             </state>
           </provider>
@@ -216,8 +202,8 @@
         <option value="$PROJECT_DIR$/ArticleSpider/middlewares.py" />
         <option value="$PROJECT_DIR$/ArticleSpider/tools/crawl_xici_ip.py" />
         <option value="$PROJECT_DIR$/ArticleSpider/models/es_types.py" />
-        <option value="$PROJECT_DIR$/ArticleSpider/pipelines.py" />
         <option value="$PROJECT_DIR$/ArticleSpider/settings.py" />
+        <option value="$PROJECT_DIR$/ArticleSpider/pipelines.py" />
         <option value="$PROJECT_DIR$/ArticleSpider/items.py" />
         <option value="$PROJECT_DIR$/ArticleSpider/spiders/jd_phone.py" />
       </list>
@@ -230,9 +216,7 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="216" />
-    <option name="y" value="6" />
-    <option name="width" value="1042" />
+    <option name="width" value="683" />
     <option name="height" value="728" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -251,6 +235,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -280,14 +265,13 @@
         </subPane>
       </pane>
       <pane id="Scratches" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../code/learn/books_info" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="js.eslint.eslintPackage" value="" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
     <property name="SearchEverywhereHistoryKey" value="RandomProxyMiddlware&#9;null&#9;null" />
   </component>
   <component name="RecentsManager">
@@ -598,7 +582,7 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
     </configuration>
-    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -624,12 +608,11 @@
       <item index="4" class="java.lang.String" itemvalue="Python.crawl_xici_ip" />
     </list>
     <recent_temporary>
-      <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.main" />
-        <item index="1" class="java.lang.String" itemvalue="Python.check_ip_source" />
-        <item index="2" class="java.lang.String" itemvalue="Python.crawl_xici_ip" />
-        <item index="3" class="java.lang.String" itemvalue="Python.es_types" />
-        <item index="4" class="java.lang.String" itemvalue="Python.lagou_login" />
+      <list size="4">
+        <item index="0" class="java.lang.String" itemvalue="Python.check_ip_source" />
+        <item index="1" class="java.lang.String" itemvalue="Python.crawl_xici_ip" />
+        <item index="2" class="java.lang.String" itemvalue="Python.es_types" />
+        <item index="3" class="java.lang.String" itemvalue="Python.lagou_login" />
       </list>
     </recent_temporary>
   </component>
@@ -662,13 +645,13 @@
     <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12884334" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25768667" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3288364" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.8657188" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.6161137" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29430893" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -813,11 +796,6 @@
           <option name="timeStamp" value="421" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/ArticleSpider/settings.py</url>
-          <line>156</line>
-          <option name="timeStamp" value="424" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/ArticleSpider/spiders/duozhuan.py</url>
           <line>30</line>
           <option name="timeStamp" value="427" />
@@ -831,36 +809,6 @@
           <url>file://$PROJECT_DIR$/ArticleSpider/pipelines.py</url>
           <line>53</line>
           <option name="timeStamp" value="436" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/ArticleSpider/items.py</url>
-          <line>422</line>
-          <option name="timeStamp" value="437" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/ArticleSpider/items.py</url>
-          <line>420</line>
-          <option name="timeStamp" value="438" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/ArticleSpider/items.py</url>
-          <line>416</line>
-          <option name="timeStamp" value="439" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/ArticleSpider/items.py</url>
-          <line>412</line>
-          <option name="timeStamp" value="440" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/ArticleSpider/items.py</url>
-          <line>413</line>
-          <option name="timeStamp" value="441" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/ArticleSpider/items.py</url>
-          <line>414</line>
-          <option name="timeStamp" value="442" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
@@ -1033,13 +981,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ArticleSpider/tools/city_list_new">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="90" lean-forward="false" selection-start-line="0" selection-start-column="11" selection-end-line="0" selection-end-column="90" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/ArticleSpider/tools/city_list_new" />
     <entry file="file://$PROJECT_DIR$/ArticleSpider/scrapy_redis_plus/spiders.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1051,7 +993,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-810">
           <caret line="86" column="8" lean-forward="false" selection-start-line="86" selection-start-column="8" selection-end-line="86" selection-end-column="8" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1059,7 +1000,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="190">
           <caret line="163" column="18" lean-forward="true" selection-start-line="163" selection-start-column="18" selection-end-line="163" selection-end-column="18" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1067,7 +1007,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-303">
           <caret line="1297" column="8" lean-forward="false" selection-start-line="1297" selection-start-column="8" selection-end-line="1297" selection-end-column="8" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1079,21 +1018,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ArticleSpider/tools/check_ip_source.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="10" column="22" lean-forward="true" selection-start-line="10" selection-start-column="22" selection-end-line="10" selection-end-column="22" />
-          <folding>
-            <element signature="e#33#67#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/ArticleSpider/tools/check_ip_source.py" />
     <entry file="file://C:/install/python/Lib/site-packages/scrapy/spiders/crawl.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="201">
           <caret line="33" column="6" lean-forward="false" selection-start-line="33" selection-start-column="6" selection-end-line="33" selection-end-column="6" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1109,9 +1038,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="162">
           <caret line="79" column="22" lean-forward="true" selection-start-line="79" selection-start-column="22" selection-end-line="79" selection-end-column="84" />
-          <folding>
-            <element signature="e#24#48#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1127,7 +1053,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-617">
           <caret line="42" column="27" lean-forward="true" selection-start-line="42" selection-start-column="27" selection-end-line="42" selection-end-column="27" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1135,7 +1060,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1143,11 +1067,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="151">
           <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="2" selection-end-line="9" selection-end-column="24" />
-          <folding>
-            <element signature="e#37#52#0" expanded="true" />
-            <marker date="1512705685043" expanded="true" signature="1565:1600" ph="delete from " />
-            <marker date="1512705685043" expanded="true" signature="2522:2599" ph="SELECT ip, p... proxy_ip" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1155,7 +1074,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="52">
           <caret line="8" column="2" lean-forward="false" selection-start-line="8" selection-start-column="2" selection-end-line="8" selection-end-column="2" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1171,7 +1089,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ArticleSpider/spiders/zhihu.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-665">
+        <state relative-caret-position="475">
           <caret line="34" column="24" lean-forward="false" selection-start-line="34" selection-start-column="24" selection-end-line="34" selection-end-column="24" />
           <folding />
         </state>
@@ -1181,7 +1099,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="58" column="8" lean-forward="false" selection-start-line="58" selection-start-column="8" selection-end-line="58" selection-end-column="8" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1189,93 +1106,74 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1">
           <caret line="249" column="0" lean-forward="false" selection-start-line="249" selection-start-column="0" selection-end-line="249" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="15" column="42" lean-forward="true" selection-start-line="15" selection-start-column="42" selection-end-line="15" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ArticleSpider/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="341">
-          <caret line="161" column="2" lean-forward="false" selection-start-line="161" selection-start-column="2" selection-end-line="161" selection-end-column="2" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://C:/install/python/Lib/site-packages/scrapy_splash/request.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
+        <state relative-caret-position="361">
           <caret line="24" column="17" lean-forward="false" selection-start-line="24" selection-start-column="17" selection-end-line="24" selection-end-column="17" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ArticleSpider/pipelines.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="52" column="40" lean-forward="false" selection-start-line="52" selection-start-column="40" selection-end-line="52" selection-end-column="40" />
-          <folding>
-            <element signature="e#25#75#0" expanded="true" />
-            <marker date="1512712154418" expanded="true" signature="551:722" ph="insert into phone_list... " />
-            <marker date="1512712154418" expanded="true" signature="721:722" ph="insert into JobBole... " />
-            <marker date="1512712154418" expanded="true" signature="1846:1977" ph="insert into JobBole... " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ArticleSpider/middlewares.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1324">
-          <caret line="83" column="0" lean-forward="true" selection-start-line="83" selection-start-column="0" selection-end-line="83" selection-end-column="0" />
+        <state relative-caret-position="1520">
+          <caret line="83" column="0" lean-forward="false" selection-start-line="83" selection-start-column="0" selection-end-line="83" selection-end-column="0" />
           <folding>
             <element signature="e#168#194#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/ArticleSpider/pipelines.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="912">
+          <caret line="52" column="38" lean-forward="false" selection-start-line="52" selection-start-column="38" selection-end-line="52" selection-end-column="38" />
+          <folding>
+            <element signature="e#25#75#0" expanded="true" />
+            <marker date="1512749245918" expanded="true" signature="551:722" ph="insert into phone_list... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/ArticleSpider/items.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="149">
-          <caret line="408" column="27" lean-forward="true" selection-start-line="408" selection-start-column="27" selection-end-line="408" selection-end-column="27" />
+        <state relative-caret-position="429">
+          <caret line="305" column="15" lean-forward="false" selection-start-line="305" selection-start-column="14" selection-end-line="305" selection-end-column="15" />
           <folding>
-            <element signature="e#151#167#0" expanded="true" />
-            <element signature="e#943#1024#0" expanded="false" />
-            <element signature="e#1051#1766#0" expanded="false" />
-            <element signature="e#1791#2005#0" expanded="false" />
-            <element signature="e#2048#2614#0" expanded="false" />
-            <element signature="e#2639#2869#0" expanded="false" />
-            <element signature="e#2901#3040#0" expanded="false" />
-            <element signature="e#3070#3689#0" expanded="false" />
-            <element signature="e#3940#5817#0" expanded="false" />
-            <element signature="e#4598#5155#0" expanded="false" />
-            <element signature="e#5194#5817#0" expanded="false" />
-            <element signature="e#5859#7171#0" expanded="false" />
-            <element signature="e#7215#8807#0" expanded="false" />
-            <element signature="e#8844#12536#0" expanded="false" />
-            <marker date="1512746334141" expanded="true" signature="4651:4943" ph="insert into JobBole... " />
-            <marker date="1512746334141" expanded="true" signature="6240:6621" ph="insert into zhihu_answer... " />
-            <marker date="1512746334141" expanded="true" signature="7584:7994" ph="insert into zhihu_question... " />
-            <marker date="1512746334141" expanded="true" signature="10497:11015" ph="insert into LaGou... " />
-            <marker date="1512746334141" expanded="true" signature="14786:15293" ph="insert into ZhiLian... " />
-            <marker date="1512746334141" expanded="true" signature="17125:17194" ph="insert into phone_list... " />
+            <marker date="1512833192360" expanded="true" signature="4651:4943" ph="insert into JobBole... " />
+            <marker date="1512833192360" expanded="true" signature="6240:6621" ph="insert into zhihu_answer... " />
+            <marker date="1512833192360" expanded="true" signature="7584:7994" ph="insert into zhihu_question... " />
+            <marker date="1512833192360" expanded="true" signature="10497:11015" ph="insert into LaGou... " />
+            <marker date="1512833192360" expanded="true" signature="14788:15295" ph="insert into ZhiLian... " />
+            <marker date="1512833192360" expanded="true" signature="17127:17196" ph="insert into phone_list... " />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="18" column="0" lean-forward="true" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ArticleSpider/spiders/jd_phone.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="117">
-          <caret line="37" column="47" lean-forward="true" selection-start-line="37" selection-start-column="47" selection-end-line="37" selection-end-column="47" />
-          <folding>
-            <element signature="e#24#37#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="110">
+          <caret line="29" column="72" lean-forward="false" selection-start-line="29" selection-start-column="72" selection-end-line="29" selection-end-column="72" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ArticleSpider/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="299">
+          <caret line="161" column="63" lean-forward="false" selection-start-line="161" selection-start-column="63" selection-end-line="161" selection-end-column="63" />
+          <folding />
         </state>
       </provider>
     </entry>

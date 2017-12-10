@@ -309,7 +309,7 @@ class LaGouItem(scrapy.Item):
         article.suggest = gen_suggests(ZhilianJob._doc_type.index, ((article.job_name, 10), (article.company_name, 7)))
         article.save()
         #记录爬取的多条
-        redis_cli.incr("lagou_count")
+        # redis_cli.incr("lagou_count")
         return
 
 class ZhiLianItem(scrapy.Item):

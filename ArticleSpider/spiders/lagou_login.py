@@ -33,7 +33,7 @@ class LagouSpider(CrawlSpider):
     )
 
     def __init__(self):
-        self.browser = webdriver.Chrome(executable_path="G:/python/scrapy/tools/chromedriver_win32/chromedriver.exe")
+        self.browser = webdriver.Chrome(executable_path="D:/python/chromedriver.exe")
         super(LagouSpider, self).__init__()
         dispatcher.connect(self.spider_closed, signals.spider_closed)
 

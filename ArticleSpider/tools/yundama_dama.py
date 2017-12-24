@@ -80,11 +80,11 @@ def Run(file):
         yundama = YDMHttp(username, password, appid, appkey)
 
         # 登陆云打码
-        uid = yundama.login();
+        uid = yundama.login()
         print ('uid: %s' % uid)
 
         # 查询余额
-        balance = yundama.balance();
+        balance = yundama.balance()
         print ('balance: %s' % balance)
 
         # 开始识别，图片路径，验证码类型ID，超时时间（秒），识别结果

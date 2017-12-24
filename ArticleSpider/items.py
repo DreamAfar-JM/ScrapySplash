@@ -166,7 +166,7 @@ class JobBoleArticleItem(scrapy.Item):
         article.suggest = gen_suggests(JobboleArticle._doc_type.index, ((article.Title, 10), (article.Content, 7)))
         article.save()
         #记录爬取的多条
-        redis_cli.incr("jobbole_count")
+        # redis_cli.incr("jobbole_count")
         return
 
 class ZhiHuAnswerItem(scrapy.Item):
@@ -421,3 +421,114 @@ class JDPhoneItem(scrapy.Item):
         params = (phone_name,price,phone_url)
 
         return insert_sql,params
+
+class WencaiBaseInfo(scrapy.Item):
+    # 基本信息
+    Code = scrapy.Field()
+    Abb = scrapy.Field()
+    Industry = scrapy.Field()
+    City = scrapy.Field()
+    def get_insert_sql(self):
+        Code = self["Code"]
+        Abb = self["Abb"]
+        Industry =  self["Industry"]
+        City =  self["City"]
+
+        insert_sql = """
+            insert into BaseInfo(Code,Abb,Industry,City)  VALUES (%s,%s,%s,%s)
+        """
+        params = (Code,Abb,Industry,City)
+        return insert_sql,params
+class WencaiClinicShares(scrapy.Item):
+    # 牛叉诊股
+    Code = scrapy.Field()
+    Title = scrapy.Field()
+    Context = scrapy.Field()
+    ClinicShareUrl = scrapy.Field()
+    Score = scrapy.Field()
+    ShortTrend = scrapy.Field()
+    MiddleTrend = scrapy.Field()
+    LongTrend = scrapy.Field()
+    #ClinicShares = scrapy.Field()
+    def get_insert_sql(self):
+        Code = self["Code"]
+        Title = self["Title"]
+        Context =  self["Context"]
+        ClinicShareUrl =  self["ClinicShareUrl"]
+        Score =  self["Score"]
+        ShortTrend =  self["ShortTrend"][0]
+        MiddleTrend =  self["MiddleTrend"][0]
+        LongTrend =  self["LongTrend"][0]
+        #ClinicShares =  self["ClinicShares"]
+
+        insert_sql = """
+            insert into ClinicShares(Code,Title,Context,ClinicShareUrl,Score,ShortTrend,MiddleTrend,LongTrend)  VALUES (%s,%s,%s,%s,%s,%s,%s,%s)
+        """
+        params = (Code,Title,Context,ClinicShareUrl,Score,ShortTrend,MiddleTrend,LongTrend)
+        return insert_sql,params
+
+class WencaiImportEvents(scrapy.Item):
+    # 重要事件
+    Code = scrapy.Field()
+    EventName= scrapy.Field()
+    EventContext= scrapy.Field()
+    EventTime= scrapy.Field()
+    def get_insert_sql(self):
+        Code = self["Code"]
+        EventName = self["EventName"]
+        EventContext =  self["EventContext"]
+        EventTime =  self["EventTime"]
+
+        insert_sql = """
+            insert into ImportEvents(Code,EventName,EventContext,EventTime)  VALUES (%s,%s,%s,%s)
+        """
+        params = (Code,EventName,EventContext,EventTime)
+        return insert_sql,params
+class WencaiImportNews(scrapy.Item):
+    # 重要新闻
+    Code = scrapy.Field()
+    NewTitle = scrapy.Field()
+    NewContext = scrapy.Field()
+    NewUrl = scrapy.Field()
+
+    def get_insert_sql(self):
+        Code = self["Code"]
+        NewTitle = self["NewTitle"]
+        NewContext =  self["NewContext"][0]
+        NewUrl =  self["NewUrl"]
+
+        insert_sql = """
+            insert into ImportNews(Code,NewTitle,NewContext,NewUrl)  VALUES (%s,%s,%s,%s)
+        """
+        params = (Code,NewTitle,NewContext,NewUrl)
+        return insert_sql,params
+
+class WencaiInvestmentAnalysis(scrapy.Item):
+    # 投顾分析
+    Code = scrapy.Field()
+    InvestmentContext = scrapy.Field()
+
+    def get_insert_sql(self):
+        Code = self["Code"]
+        InvestmentContext = self["InvestmentContext"]
+
+        insert_sql = """
+               insert into InvestmentAnalysis(Code,InvestmentContext)  VALUES (%s,%s)
+           """
+        params = (Code, InvestmentContext)
+        return insert_sql, params
+
+class WencaiWindy(scrapy.Item):
+    # 技术风向标
+    Code = scrapy.Field()
+    WindyContext = scrapy.Field()
+
+    def get_insert_sql(self):
+        Code = self["Code"]
+        WindyContext = self["WindyContext"]
+
+        insert_sql = """
+               insert into Windy(Code,WindyContext)  VALUES (%s,%s)
+           """
+        params = (Code, WindyContext)
+        return insert_sql, params

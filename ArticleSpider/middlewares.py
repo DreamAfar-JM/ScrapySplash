@@ -81,3 +81,5 @@ class RandomUserAgentMiddlware(object):
 #         request.meta["proxy"] = get_ip.get_random_ip()
 
 
+
+# 使用浏览器cookie登陆

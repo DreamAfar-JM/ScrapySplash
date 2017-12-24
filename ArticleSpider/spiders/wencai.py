@@ -70,7 +70,7 @@ class WencaiSpider(scrapy.Spider):
         le2 = LinkExtractor(allow=pattern2)
         links = le2.extract_links(response)
         for link in links:
-            yield SplashRequest(response.url, endpoint='execute', args={'images': 0, 'lua_source': lua_script2}, cache_args=['lua_source'], callback=self.parse_num_url,dont_filter=True)
+            yield SplashRequest(link.url, endpoint='execute', args={'images': 0, 'lua_source': lua_script2}, cache_args=['lua_source'], callback=self.parse_num_url,dont_filter=True)
 
     def parse(self, response):
         # print("found_url: %s"%response.url)
@@ -155,7 +155,7 @@ class WencaiSpider(scrapy.Spider):
             le2 = LinkExtractor(allow=pattern2)
             links = le2.extract_links(response)
             for link in links:
-                yield SplashRequest(response.url, endpoint='execute', args={'images': 0, 'lua_source': lua_script2},
+                yield SplashRequest(link.url, endpoint='execute', args={'images': 0, 'lua_source': lua_script2},
                                     cache_args=['lua_source'], callback=self.parse_num_url, dont_filter=True)
 
 

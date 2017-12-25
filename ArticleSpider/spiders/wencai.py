@@ -171,15 +171,15 @@ class WencaiSpider(scrapy.Spider):
             for i in [BaseInfoItem,ClinicSharesItem,InvestmentAnalysis,WindyItem]:
                 print("yield: %s" %i)
                 yield i
-            pattern3 = '/stockpick/.+&qs=stockpick_tag$'
-            print("匹配到tag结尾的股票列表")
-            le3 = LinkExtractor(allow=pattern3)
-            links3 = le3.extract_links(response)
-            for link3 in links3:
-                print("tag url:%s" %link3.url)
-                yield SplashRequest(link3.url, endpoint='execute', args={'images': 0, 'lua_source': lua_script},
-                                    cache_args=['lua_source'], callback=self.parse_num_url,dont_filter=True)
-                print("url:%s已被yield" %link3.url)
+            # pattern3 = '/stockpick/.+&qs=stockpick_tag$'
+            # print("匹配到tag结尾的股票列表")
+            # le3 = LinkExtractor(allow=pattern3)
+            # links3 = le3.extract_links(response)
+            # for link3 in links3:
+            #     print("tag url:%s" %link3.url)
+            #     yield SplashRequest(link3.url, endpoint='execute', args={'images': 0, 'lua_source': lua_script},
+            #                         cache_args=['lua_source'], callback=self.parse_num_url,dont_filter=True)
+            #     print("url:%s已被yield" %link3.url)
 
 
 

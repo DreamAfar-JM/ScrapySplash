@@ -4,6 +4,7 @@ import scrapy
 import datetime
 
 from scrapy.linkextractors import LinkExtractor
+# from scrapy.spiders.splash_crawl import CrawlSpider, Rule
 from scrapy.spiders import CrawlSpider, Rule
 from ArticleSpider.items import LaGouItem,ArticleItemLoader
 from ArticleSpider.utils.common import get_md5

@@ -9,9 +9,9 @@ import sys
 lua_script = """
 function main(splash)
     splash:go(splash.args.url)
-    splash:wait(10)
+    splash:wait(2)
     splash:runjs("document.getElementsById('footbarCon').scrollIntoView(true)")
-    splash:wait(10)
+    splash:wait(2)
     return splash:html()
 end
 """
@@ -19,9 +19,9 @@ end
 lua_script2 = """
 function main(splash)
     splash:go(splash.args.url)
-    splash:wait(5)
+    splash:wait(2)
     splash:runjs("document.getElementsById('next').click()")
-    splash:wait(5)
+    splash:wait(2)
     return splash:html()
 end
 """
@@ -29,9 +29,9 @@ end
 lua_script3 = """
 function main(splash)
     splash:go(splash.args.url)
-    splash:wait(5)
+    splash:wait(2)
     splash:runjs("document.getElementsClassName('doctor_special_page_foot adaptive_foot1').scrollIntoView(true)")
-    splash:wait(5)
+    splash:wait(2)
     return splash:html()
 end
 """
@@ -40,11 +40,11 @@ class WencaiSpider(scrapy.Spider):
     name = "wencai"
     allowed_domains = ["iwencai.com"]
     start_url = "https://www.iwencai.com/stockpick?my=0&ordersignal=0"
-
+    url_list = []
     def start_requests(self):
         # 请求第一页
         print("开始爬取首页")
-        yield Request(self.start_url, callback=self.shares_list, dont_filter=True)
+        yield Request(self.start_url, callback=self.shares_list)
         # yield SplashRequest(self.start_url, endpoint='execute', args={'lua_source': lua_script}, cache_args=['lua_source'])
     def shares_list(self,response):
         pattern = '/stockpick/.*'
@@ -58,6 +58,7 @@ class WencaiSpider(scrapy.Spider):
             print("发现一个股票列表页面:%s" %(link.url))
             yield SplashRequest(link.url, endpoint='execute', args={'images': 0, 'lua_source': lua_script},
                                 cache_args=['lua_source'], callback=self.parse_num_url)
+            # SplashRequest(link.url, endpoint='execute', args={'images': 0, 'lua_source': lua_script},cache_args=['lua_source'], callback=self.parse_num_url, splash_url=)
 
     def parse_num_url(self,response):
         # link_list = []
@@ -73,16 +74,46 @@ class WencaiSpider(scrapy.Spider):
             print("yield: %s" %num_link.url)
             # print(link_list)
             # pass
-        # if "disable_next" not in str(response.body) and "ts=1" not in response.url:
-        #     print("link:%s"%num_links)
-        #     print("发现还有下页的股票列表：%s" %response.url)
-        #     yield SplashRequest(response.url, endpoint='execute', args={'images': 0, 'lua_source': lua_script2}, cache_args=['lua_source'], callback=self.parse_num_url,dont_filter=True)
         pattern2 = '/stockpick/.+qs=lm_.+'
         le2 = LinkExtractor(allow=pattern2)
         links2 = le2.extract_links(response)
         for link2 in links2:
             print("获取到qs股票列表页：%s" %link2.url)
-            yield SplashRequest(link2.url, endpoint='execute', args={'images': 0, 'lua_source': lua_script}, cache_args=['lua_source'], callback=self.parse_num_url,dont_filter=True)
+            yield SplashRequest(link2.url, endpoint='execute', args={'images': 0, 'lua_source': lua_script}, cache_args=['lua_source'], callback=self.parse_num_url)
+
+        page_num = response.css("span.num::text").re_first("(\d+)")
+        print(page_num
+
+
+
+              )
+        # 总条数除以每页显示的数目如果大于一即有下页
+        page_count = int(page_num) // 30 + 1
+        print("总共股票代码数：%s，页数：%s" % (page_num, page_count))
+        if page_count != 1:
+            # 判断当前页面是否已经点击过下页标签
+            if response.url not in self.url_list:
+                # 如果没有被点击过就先把他加入到已经点击过的列表中，然后执行点击操作
+                self.url_list.append(response.url)
+                # 根据时间情况进行标签提取，然后点击对应的标签
+                for i in range(2, page_count + 1):
+                    lua_script2 = """
+                            function main(splash)
+                                splash:go(splash.args.url)
+                                splash:wait(2)
+                                splash:runjs("$('.pagination > a')[%s].click()")
+                                splash:wait(2)
+                                return splash:html()
+                            end
+                            """ % (i)
+                    print("获取第%s页" % i)
+                    # 进行点击操作，使用的是上面的lua脚本，此项目是点击class name为pagination下的a标签的按钮
+                    # 其中[%s]表示第几个，此项目为第几页，按需分析
+                    # dont_filter开启，避免被scrapy去重
+                    yield SplashRequest(response.url, endpoint='execute', args={'images': 0, 'lua_source': lua_script2},
+                                        cache_args=['lua_source'], callback=self.parse_num_url, dont_filter=True)
+
+
 
     def parse(self, response):
         # print("found_url: %s"%response.url)
@@ -92,10 +123,19 @@ class WencaiSpider(scrapy.Spider):
             sel = response.css("div.simple_table_viewport")[0]
         except IndexError:
             print("页面未解析到response,重新下载")
-            yield SplashRequest(response.url, endpoint='execute', args={'images': 0, 'lua_source': lua_script3}, cache_args=['lua_source'], callback=self.parse)
+            yield SplashRequest(response.url, endpoint='execute', args={'images': 0, 'lua_source': lua_script3}, cache_args=['lua_source'], callback=self.parse,dont_filter=True)
             print("重新下载URL：%s" %response.url)
         else:
             print("获取到sel")
+            pattern3 = '/stockpick/.+&qs=stockpick_tag$'
+            print("匹配到tag结尾的股票列表")
+            le3 = LinkExtractor(allow=pattern3)
+            links3 = le3.extract_links(response)
+            for link3 in links3:
+                print("tag url:%s" %link3.url)
+                yield SplashRequest(link3.url, endpoint='execute', args={'images': 0, 'lua_source': lua_script},
+                                    cache_args=['lua_source'], callback=self.parse_num_url)
+                print("url:%s已被yield" %link3.url)
             BaseInfoItem = WencaiBaseInfo()
             ClinicSharesItem = WencaiClinicShares()
             ImportEvents = WencaiImportEvents()
@@ -171,15 +211,7 @@ class WencaiSpider(scrapy.Spider):
             for i in [BaseInfoItem,ClinicSharesItem,InvestmentAnalysis,WindyItem]:
                 print("yield: %s" %i)
                 yield i
-            # pattern3 = '/stockpick/.+&qs=stockpick_tag$'
-            # print("匹配到tag结尾的股票列表")
-            # le3 = LinkExtractor(allow=pattern3)
-            # links3 = le3.extract_links(response)
-            # for link3 in links3:
-            #     print("tag url:%s" %link3.url)
-            #     yield SplashRequest(link3.url, endpoint='execute', args={'images': 0, 'lua_source': lua_script},
-            #                         cache_args=['lua_source'], callback=self.parse_num_url,dont_filter=True)
-            #     print("url:%s已被yield" %link3.url)
+
 
 
 

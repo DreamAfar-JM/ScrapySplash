@@ -79,14 +79,12 @@ class WencaiSpider(scrapy.Spider):
         links2 = le2.extract_links(response)
         for link2 in links2:
             print("获取到qs股票列表页：%s" %link2.url)
+            #if link2.url not in self.url_list:
+                #self.url_list.append(link2.url)
             yield SplashRequest(link2.url, endpoint='execute', args={'images': 0, 'lua_source': lua_script}, cache_args=['lua_source'], callback=self.parse_num_url)
 
         page_num = response.css("span.num::text").re_first("(\d+)")
-        print(page_num
-
-
-
-              )
+        print(page_num)
         # 总条数除以每页显示的数目如果大于一即有下页
         page_count = int(page_num) // 30 + 1
         print("总共股票代码数：%s，页数：%s" % (page_num, page_count))
@@ -127,15 +125,17 @@ class WencaiSpider(scrapy.Spider):
             print("重新下载URL：%s" %response.url)
         else:
             print("获取到sel")
-            pattern3 = '/stockpick/.+&qs=stockpick_tag$'
-            print("匹配到tag结尾的股票列表")
-            le3 = LinkExtractor(allow=pattern3)
-            links3 = le3.extract_links(response)
-            for link3 in links3:
-                print("tag url:%s" %link3.url)
-                yield SplashRequest(link3.url, endpoint='execute', args={'images': 0, 'lua_source': lua_script},
-                                    cache_args=['lua_source'], callback=self.parse_num_url)
-                print("url:%s已被yield" %link3.url)
+            # pattern3 = '/stockpick/.+&qs=stockpick_tag$'
+            # print("匹配到tag结尾的股票列表")
+            # le3 = LinkExtractor(allow=pattern3)
+            # links3 = le3.extract_links(response)
+            # for link3 in links3:
+            #     print("tag url:%s" %link3.url)
+            #     #if link3.url not in self.url_list:
+            #     yield SplashRequest(link3.url, endpoint='execute', args={'images': 0, 'lua_source': lua_script},
+            #                             cache_args=['lua_source'], callback=self.parse_num_url)
+            #     print("url:%s已被yield" %link3.url)
+                    #self.url_list.append(link3.url)
             BaseInfoItem = WencaiBaseInfo()
             ClinicSharesItem = WencaiClinicShares()
             ImportEvents = WencaiImportEvents()

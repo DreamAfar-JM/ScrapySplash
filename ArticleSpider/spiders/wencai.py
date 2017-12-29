@@ -53,7 +53,7 @@ class WencaiSpider(scrapy.Spider):
         le = LinkExtractor(allow=pattern,deny=pattern_deny)
         links = le.extract_links(response)
         print("开始解析股票列表")
-        print(response.url)
+        # print(response.url)
         for link in links:
             print("发现一个股票列表页面:%s" %(link.url))
             yield SplashRequest(link.url, endpoint='execute', args={'images': 0, 'lua_source': lua_script},
@@ -62,6 +62,15 @@ class WencaiSpider(scrapy.Spider):
 
     def parse_num_url(self,response):
         # link_list = []
+        # pattern2 = '/stockpick/.+qs=lm_.+'
+        # le2 = LinkExtractor(allow=pattern2)
+        # links2 = le2.extract_links(response)
+        # for link2 in links2:
+        #     print("获取到qs股票列表页：%s" % link2.url)
+        #     # if link2.url not in self.url_list:
+        #     # self.url_list.append(link2.url)
+        #     yield SplashRequest(link2.url, endpoint='execute', args={'images': 0, 'lua_source': lua_script},
+        #                         cache_args=['lua_source'], callback=self.parse_num_url)
         print("开始解析股票页面")
         pattern = '/stockpick/.+\d{6}$'
         le = LinkExtractor(allow=pattern)
@@ -74,14 +83,7 @@ class WencaiSpider(scrapy.Spider):
             print("yield: %s" %num_link.url)
             # print(link_list)
             # pass
-        pattern2 = '/stockpick/.+qs=lm_.+'
-        le2 = LinkExtractor(allow=pattern2)
-        links2 = le2.extract_links(response)
-        for link2 in links2:
-            print("获取到qs股票列表页：%s" %link2.url)
-            #if link2.url not in self.url_list:
-                #self.url_list.append(link2.url)
-            yield SplashRequest(link2.url, endpoint='execute', args={'images': 0, 'lua_source': lua_script}, cache_args=['lua_source'], callback=self.parse_num_url)
+
 
         page_num = response.css("span.num::text").re_first("(\d+)")
         print(page_num)

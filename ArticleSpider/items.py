@@ -532,3 +532,9 @@ class WencaiWindy(scrapy.Item):
            """
         params = (Code, WindyContext)
         return insert_sql, params
+
+class SaveToRedisItem(scrapy.Item):
+    # define the fields for your item here like:
+    # name = scrapy.Field()
+    id = scrapy.Field()
+    url = scrapy.Field()

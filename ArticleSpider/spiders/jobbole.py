@@ -3,7 +3,7 @@ from urllib import parse
 
 from ArticleSpider.items import JobBoleArticleItem,ArticleItemLoader
 from scrapy.http import Request
-from ArticleSpider.scrapy_redis.spiders import RedisSpider
+from scrapy_redis.spiders import RedisSpider
 
 
 #class JobboleSpider(scrapy.Spider):

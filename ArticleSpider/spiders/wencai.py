@@ -40,7 +40,7 @@ end
 class WencaiSpider(RedisSpider):
     name = "wencai"
     allowed_domains = ["iwencai.com"]
-    # start_url = "https://www.iwencai.com/stockpick?my=0&ordersignal=0"
+    start_url = "https://www.iwencai.com/stockpick?my=0&ordersignal=0"
     url_list = []
     def parse(self,response):
         pattern = '/stockpick/.*'

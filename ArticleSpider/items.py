@@ -538,3 +538,29 @@ class SaveToRedisItem(scrapy.Item):
     # name = scrapy.Field()
     id = scrapy.Field()
     url = scrapy.Field()
+
+
+class CNBlogItem(scrapy.Item):
+    # 技术风向标
+    author = scrapy.Field()
+    fans = scrapy.Field()
+    title = scrapy.Field()
+    content = scrapy.Field()
+    post_date = scrapy.Field()
+    class_ification = scrapy.Field()
+    tag = scrapy.Field()
+
+    def get_insert_sql(self):
+        author = self["author"]
+        fans = self["fans"]
+        title = self["title"]
+        content = self["content"]
+        post_date = self["post_date"]
+        class_ification = self["class_ification"]
+        tag = self["tag"]
+
+        insert_sql = """
+               insert into cnblog(author,fans,title,content,post_date,class_ification,tag)  VALUES (%s,%s,%s,%s,%s,%s,%s)
+           """
+        params = (author,fans,title,content,post_date,class_ification,tag)
+        return insert_sql, params

@@ -549,6 +549,7 @@ class CNBlogItem(scrapy.Item):
     post_date = scrapy.Field()
     class_ification = scrapy.Field()
     tag = scrapy.Field()
+    url = scrapy.Field()
 
     def get_insert_sql(self):
         author = self["author"]
@@ -558,9 +559,10 @@ class CNBlogItem(scrapy.Item):
         post_date = self["post_date"]
         class_ification = self["class_ification"]
         tag = self["tag"]
+        url = self["url"]
 
         insert_sql = """
-               insert into cnblog(author,fans,title,content,post_date,class_ification,tag)  VALUES (%s,%s,%s,%s,%s,%s,%s)
+               insert into cnblog(author,fans,title,content,post_date,class_ification,tag,url)  VALUES (%s,%s,%s,%s,%s,%s,%s,%s)
            """
-        params = (author,fans,title,content,post_date,class_ification,tag)
+        params = (author,fans,title,content,post_date,class_ification,tag,url)
         return insert_sql, params

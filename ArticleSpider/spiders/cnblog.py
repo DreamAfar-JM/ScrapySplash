@@ -36,6 +36,7 @@ class cnblogSpider(CrawlSpider,RedisSpider):
         post_date = response.css('#post-date::text').extract_first().split()[0]
         class_ification = ",".join(response.css("#BlogPostCategory a::text").extract())
         tag = ",".join(response.css("#EntryTag a::text").extract())
+        url = response.url
         BlogItem = CNBlogItem()
         BlogItem['author'] = author
         BlogItem['fans'] = fans
@@ -44,6 +45,7 @@ class cnblogSpider(CrawlSpider,RedisSpider):
         BlogItem['post_date'] = post_date
         BlogItem['class_ification'] = class_ification
         BlogItem['tag'] = tag
+        BlogItem['url'] = url
         yield BlogItem
 
 

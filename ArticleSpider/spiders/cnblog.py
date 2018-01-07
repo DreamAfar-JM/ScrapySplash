@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 
 from scrapy.linkextractors import LinkExtractor
-from scrapy.spiders.splashcrawl import SplashRule
+from scrapy.spiders.splashcrawl import SplashRule,CrawlSpider
 from scrapy_redis.spiders import RedisSpider
 from ArticleSpider.items import CNBlogItem
-from scrapy.spiders import CrawlSpider,Rule
+# from scrapy.spiders import Rule
 
 
 class cnblogSpider(CrawlSpider,RedisSpider):
@@ -15,12 +15,12 @@ class cnblogSpider(CrawlSpider,RedisSpider):
 
     rules = (
         # 获取网站分类
-        Rule(LinkExtractor(allow=r'/cate/.*/$'), follow=True),
+        SplashRule(LinkExtractor(allow=r'/cate/.*/$'), follow=True),
         # 匹配博主
         # Rule(LinkExtractor(allow=r'/.*/$'), follow=True),
         # 匹配下页
-        Rule(LinkExtractor(allow=r'/sitehome/p/\d+$'), follow=True),
-        Rule(LinkExtractor(allow=r'/cate/all/\d+$'), follow=True),
+        SplashRule(LinkExtractor(allow=r'/sitehome/p/\d+$'), follow=True),
+        SplashRule(LinkExtractor(allow=r'/cate/all/\d+$'), follow=True),
         # 匹配博客
         SplashRule(LinkExtractor(allow=r'.*/p/.+\.html$'), callback="parse_job", follow=True),
 

@@ -15,14 +15,19 @@ class cnblogSpider(CrawlSpider,RedisSpider):
     deny = ['www.cnblogs.com/new/']
     rules = (
         # 获取网站分类
-        # Rule(LinkExtractor(allow=r'/cate/.*/$'), follow=True),
-        # 匹配博主
-        Rule(LinkExtractor(allow=r'/\w+/$',deny_domains=deny), follow=True),
+        Rule(LinkExtractor(allow=r'/cate/.*/$'), follow=True),
         # 匹配下页
-        Rule(LinkExtractor(allow=r'/sitehome/p/\d+$',deny_domains=deny), follow=True),
-        Rule(LinkExtractor(allow=r'/cate/all/($|\d+)',deny_domains=deny), follow=True),
+        Rule(LinkExtractor(allow=r'/sitehome/p/\d+$', deny_domains=deny), follow=True),
+        # Rule(LinkExtractor(allow=r'/pick/\d+',deny_domains=deny), follow=True),
+        Rule(LinkExtractor(allow=r'/cate/all/($|\d+)', deny_domains=deny), follow=True),
+        # 匹配博主
+        Rule(LinkExtractor(allow=r'/\w+(/$|$)',deny_domains=deny), follow=True),
+        # 匹配博主下一页
+        Rule(LinkExtractor(allow=r'.*/default\.html\?page=\d+$',deny_domains=deny), follow=True),
+        # 匹配随笔分类
+        # Rule(LinkExtractor(allow=r'.*/category/\d+\.html', deny_domains=deny), follow=True),
         # 匹配博客
-        Rule(LinkExtractor(allow=r'.*/p/.+\.html$',deny_domains=deny), callback="parse_job", follow=True),
+        Rule(LinkExtractor(allow=r'.*/p/.+\.html',deny_domains=deny), callback="parse_job", follow=False),
         # Rule(LinkExtractor(allow=r'.*/page/\d+/$',deny_domains=deny), callback="parse_job", follow=True),
 
     )

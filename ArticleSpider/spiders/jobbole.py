@@ -4,7 +4,11 @@ from urllib import parse
 from ArticleSpider.items import JobBoleArticleItem,ArticleItemLoader
 from scrapy.http import Request
 from scrapy_redis.spiders import RedisSpider
-
+import os,sys
+ProjectDir = os.path.abspath(os.path.dirname(__file__))
+ProjectDir = os.path.abspath(os.path.dirname(ProjectDir))
+ProjectDir = os.path.abspath(os.path.dirname(ProjectDir))
+sys.path.insert(0, ProjectDir)
 
 #class JobboleSpider(scrapy.Spider):
 #基于分布式redis

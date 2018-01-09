@@ -1,5 +1,12 @@
 # -*- coding: utf-8 -*-
 
+
+import  os,sys
+ProjectDir = os.path.abspath(os.path.dirname(__file__))
+ProjectDir = os.path.abspath(os.path.dirname(ProjectDir))
+ProjectDir = os.path.abspath(os.path.dirname(ProjectDir))
+sys.path.insert(0, ProjectDir)
+
 from scrapy.linkextractors import LinkExtractor
 # from scrapy.spiders.splashcrawl import Rule,CrawlSpider
 from scrapy_redis.spiders import RedisSpider

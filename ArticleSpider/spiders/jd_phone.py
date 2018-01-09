@@ -1,9 +1,15 @@
 # -*- coding: utf-8 -*-
+
+
 import scrapy
 from scrapy import Request
 from scrapy_splash import SplashRequest
 from ArticleSpider.items import JDPhoneItem,ArticleItemLoader
-
+import os,sys
+ProjectDir = os.path.abspath(os.path.dirname(__file__))
+ProjectDir = os.path.abspath(os.path.dirname(ProjectDir))
+ProjectDir = os.path.abspath(os.path.dirname(ProjectDir))
+sys.path.insert(0, ProjectDir)
 lua_script = """
 function main(splash)
     splash:go(splash.args.url)

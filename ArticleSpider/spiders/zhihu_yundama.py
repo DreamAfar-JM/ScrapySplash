@@ -3,16 +3,19 @@ import re
 import json
 import time
 import scrapy
-import os,sys
 import datetime
 from urllib import parse
 from ArticleSpider.items import ZhiHuAnswerItem,ZhiHuQuestionItem
 from scrapy.loader  import ItemLoader
 #调用云打码
 from ArticleSpider.tools import yundama_dama
-import http.cookiejar as cookielib
-import requests
+
 from scrapy.cmdline import execute
+import os,sys
+ProjectDir = os.path.abspath(os.path.dirname(__file__))
+ProjectDir = os.path.abspath(os.path.dirname(ProjectDir))
+ProjectDir = os.path.abspath(os.path.dirname(ProjectDir))
+sys.path.insert(0, ProjectDir)
 
 #验证码存放位置
 #获取当前文件的的绝对路径

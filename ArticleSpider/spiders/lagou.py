@@ -1,15 +1,17 @@
 # -*- coding: utf-8 -*-
-import re
-import scrapy
-import datetime
 
 from scrapy.linkextractors import LinkExtractor
 # from scrapy.spiders.splash_crawl import CrawlSpider, Rule
 from scrapy.spiders import CrawlSpider, Rule
 from ArticleSpider.items import LaGouItem,ArticleItemLoader
-from ArticleSpider.utils.common import get_md5
 from scrapy_redis.spiders import RedisSpider
-from ArticleSpider.settings import SQL_DATETIME_FORMAT,SQL_DATE_FORMAT
+
+import os,sys
+ProjectDir = os.path.abspath(os.path.dirname(__file__))
+ProjectDir = os.path.abspath(os.path.dirname(ProjectDir))
+ProjectDir = os.path.abspath(os.path.dirname(ProjectDir))
+sys.path.insert(0, ProjectDir)
+
 class LagouSpider(CrawlSpider,RedisSpider):
     name = 'lagou'
     allowed_domains = ['www.lagou.com']

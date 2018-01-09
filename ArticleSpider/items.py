@@ -5,6 +5,9 @@
 # See documentation in:
 # http://doc.scrapy.org/en/latest/topics/items.html
 import re,os,sys
+ProjectDir = os.path.abspath(os.path.dirname(__file__))
+ProjectDir = os.path.abspath(os.path.dirname(ProjectDir))
+sys.path.insert(0, ProjectDir)
 import scrapy
 import datetime
 from w3lib.html import remove_tags
@@ -12,7 +15,7 @@ from ArticleSpider.settings import SQL_DATE_FORMAT,SQL_DATETIME_FORMAT
 from ArticleSpider.utils.common import GetNum
 from scrapy.loader  import ItemLoader
 from scrapy.loader.processors import MapCompose,TakeFirst,Join
-from ArticleSpider.models.es_types import JobboleArticle,ZhilianJob,LagouJob
+from .models.es_types import JobboleArticle,ZhilianJob,LagouJob
 from elasticsearch_dsl.connections import connections
 # from ArticleSpider.settings import REDIS_HOST,ES_HOST
 import redis

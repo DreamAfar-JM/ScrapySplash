@@ -4,7 +4,7 @@ import sys,os
 ProjectDir = os.path.abspath(os.path.dirname(__file__))
 sys.path.insert(0, ProjectDir)
 # Scrapy settings for ArticleSpider project
-#
+# ###
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
 #

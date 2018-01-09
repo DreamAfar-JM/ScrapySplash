@@ -1,16 +1,18 @@
 # -*- coding: utf-8 -*-
-import re
-import scrapy
-import datetime
-import json,time
+
 from scrapy.linkextractors import LinkExtractor
 from scrapy.spiders import CrawlSpider, Rule
 from ArticleSpider.items import LaGouItem,ArticleItemLoader
 from ArticleSpider.utils.common import get_md5
-from ArticleSpider.settings import SQL_DATETIME_FORMAT,SQL_DATE_FORMAT
 from scrapy.xlib.pydispatch import dispatcher
 from scrapy import signals
 from selenium import webdriver
+import os,sys
+ProjectDir = os.path.abspath(os.path.dirname(__file__))
+ProjectDir = os.path.abspath(os.path.dirname(ProjectDir))
+ProjectDir = os.path.abspath(os.path.dirname(ProjectDir))
+sys.path.insert(0, ProjectDir)
+
 class LagouSpider(CrawlSpider):
     name = 'lagou_login'
     allowed_domains = ['www.lagou.com']

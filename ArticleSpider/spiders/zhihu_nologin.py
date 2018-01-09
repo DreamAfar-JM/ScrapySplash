@@ -7,8 +7,11 @@ import datetime
 from urllib import parse
 from ArticleSpider.items import ZhiHuAnswerItem,ZhiHuQuestionItem
 from scrapy.loader  import ItemLoader
-import http.cookiejar as cookielib
-import requests
+import os,sys
+ProjectDir = os.path.abspath(os.path.dirname(__file__))
+ProjectDir = os.path.abspath(os.path.dirname(ProjectDir))
+ProjectDir = os.path.abspath(os.path.dirname(ProjectDir))
+sys.path.insert(0, ProjectDir)
 
 class ZhihuSpider(scrapy.Spider):
     name = "zhihu_nologin"

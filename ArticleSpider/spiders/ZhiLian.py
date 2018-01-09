@@ -1,16 +1,18 @@
 # -*- coding: utf-8 -*-
-import re
-import scrapy
-import datetime
+
 
 from scrapy.linkextractors import LinkExtractor
 from scrapy.spiders import CrawlSpider, Rule
 from ArticleSpider.items import ZhiLianItem,ArticleItemLoader
-from ArticleSpider.utils.common import get_md5
+
 from scrapy_redis.spiders import RedisSpider
-from ArticleSpider.settings import SQL_DATETIME_FORMAT,SQL_DATE_FORMAT
 
 
+import os,sys
+ProjectDir = os.path.abspath(os.path.dirname(__file__))
+ProjectDir = os.path.abspath(os.path.dirname(ProjectDir))
+ProjectDir = os.path.abspath(os.path.dirname(ProjectDir))
+sys.path.insert(0, ProjectDir)
 class ZhilianSpider(CrawlSpider,RedisSpider):
     name = 'ZhiLian'
     allowed_domains = ['jobs.zhaopin.com']

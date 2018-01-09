@@ -2,6 +2,11 @@
 # -*- coding: utf-8 -*-
 import scrapy
 from scrapy.conf import settings
+import os,sys
+ProjectDir = os.path.abspath(os.path.dirname(__file__))
+ProjectDir = os.path.abspath(os.path.dirname(ProjectDir))
+ProjectDir = os.path.abspath(os.path.dirname(ProjectDir))
+sys.path.insert(0, ProjectDir)
 
 class DemoSpider(scrapy.Spider):
     name = "demo"

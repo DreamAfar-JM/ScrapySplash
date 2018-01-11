@@ -52,7 +52,7 @@ ROBOTSTXT_OBEY = False
 SPIDER_MIDDLEWARES = {
 #    'ArticleSpider.middlewares.ArticlespiderSpiderMiddleware': 543,
     # 启用SplashDeduplicateArgsMiddleware中间件
-    'scrapy_splash.SplashDeduplicateArgsMiddleware': 100,
+    # 'scrapy_splash.SplashDeduplicateArgsMiddleware': 100,
 }
 
 # Enable or disable downloader middlewares
@@ -61,9 +61,10 @@ DOWNLOADER_MIDDLEWARES = {
    #'ArticleSpider.middlewares.MyCustomDownloaderMiddleware': 543,
     'ArticleSpider.middlewares.RandomUserAgentMiddlware': 3,
     #'ArticleSpider.middlewares.RandomProxyMiddlware': 2,
-    'scrapy_splash.SplashCookiesMiddleware': 723,
-    'scrapy_splash.SplashMiddleware': 725,
-    'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware': 810,
+    # splash 所用
+    # 'scrapy_splash.SplashCookiesMiddleware': 723,
+    # 'scrapy_splash.SplashMiddleware': 725,
+    # 'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware': 810,
 
 }
 
@@ -85,7 +86,7 @@ ITEM_PIPELINES = {
     # 'ArticleSpider.pipelines.MysqlPipeline': 1,
     #异步保存数据到mysql
     'ArticleSpider.pipelines.MysqlTwistedPipline': 404,
-    'scrapy_redis.pipelines.RedisPipeline' : 300,
+    # 'scrapy_redis.pipelines.RedisPipeline' : 300,
     # 'ArticleSpider.pipelines.saveToRedisPipeline': 404,
     #保存数据到es
     #'ArticleSpider.pipelines.ESPiplines': 1,

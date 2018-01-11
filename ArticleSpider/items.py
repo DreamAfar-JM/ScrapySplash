@@ -569,3 +569,59 @@ class CNBlogItem(scrapy.Item):
            """
         params = (author,fans,title,content,post_date,class_ification,tag,url)
         return insert_sql, params
+
+class AmazonItem(scrapy.Item):
+    # 商品信息
+    # 商品ID
+    shop_id = scrapy.Field()
+    # 品牌
+    brand = scrapy.Field()
+    # 商品链接
+    url = scrapy.Field()
+    # 商品名称
+    title = scrapy.Field()
+    # 商品图url
+    image_url = scrapy.Field()
+    # 评价数
+    comment_num = scrapy.Field()
+    # 星级
+    star = scrapy.Field()
+    def get_insert_sql(self):
+        shop_id = self["shop_id"]
+        brand = self["brand"]
+        url = self["url"]
+        title = self["title"]
+        image_url = self["image_url"]
+        comment_num = self["comment_num"]
+        star = self["star"]
+        insert_sql = """
+               insert into Amazon(shop_id,brand,url,title,image_url,comment_num,star)  VALUES (%s,%s,%s,%s,%s,%s,%s)
+           """
+        params = (shop_id,brand,url,title,image_url,comment_num,star)
+        return insert_sql, params
+
+class AmazonCommentItem(scrapy.Item):
+    # 商品评价
+    # 商品ID
+    shop_id = scrapy.Field()
+    # 评价内容
+    comment_text = scrapy.Field()
+    # 评价星级占比
+    five_proportion = scrapy.Field()
+    four_proportion = scrapy.Field()
+    three_proportion = scrapy.Field()
+    two_proportion = scrapy.Field()
+    one_proportion = scrapy.Field()
+    def get_insert_sql(self):
+        shop_id = self["shop_id"]
+        comment_text = self["comment_text"]
+        five_proportion = self["five_proportion"]
+        four_proportion = self["four_proportion"]
+        three_proportion = self["three_proportion"]
+        two_proportion = self["two_proportion"]
+        one_proportion = self["one_proportion"]
+        insert_sql = """
+               insert into AmazonComment(shop_id,comment_text,five_proportion,four_proportion,three_proportion,two_proportion,one_proportion)  VALUES (%s,%s,%s,%s,%s,%s,%s)
+           """
+        params = (shop_id,comment_text,five_proportion,four_proportion,three_proportion,two_proportion,one_proportion)
+        return insert_sql, params

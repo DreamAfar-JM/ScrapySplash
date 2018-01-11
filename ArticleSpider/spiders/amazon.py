@@ -16,12 +16,11 @@ ProjectDir = os.path.abspath(os.path.dirname(ProjectDir))
 ProjectDir = os.path.abspath(os.path.dirname(ProjectDir))
 sys.path.insert(0, ProjectDir)
 
-class amazonSpider(CrawlSpider):
+class amazonSpider(CrawlSpider,RedisSpider):
     name = 'amazon'
     allowed_domains = ['amazon.cn']
-    # redis_key = "amazon:start_urls"
-    #start_urls = 'https://www.amazon.cn/%E6%9C%8D%E8%A3%85%E6%9C%8D%E9%A5%B0/b/ref=sa_menu_top_cloth_l1?ie=UTF8&node=2016156051'
-    start_urls = 'https://www.amazon.cn/gp/search/other/ref=sv_sa_0?ie=UTF8&pickerToList=brandtextbin&rh=n%3A2016156051'
+    redis_key = "amazon:start_urls"
+    # start_urls = 'https://www.amazon.cn/gp/search/other/ref=sv_sa_0?ie=UTF8&pickerToList=brandtextbin&rh=n%3A2016156051'
     header = {
         "HOST": "www.amazon.cn",
         "Pragma": "no-cache",
@@ -38,14 +37,14 @@ class amazonSpider(CrawlSpider):
     #     # Rule(LinkExtractor(allow=r'.*ref=sr_pg_\d+.*'), follow=True),
     #     Rule(LinkExtractor(allow=r'.*ref=sr_\d+_\d+.*'), follow=True),
     # )
-    def start_requests(self):
-        #return [scrapy.Request("https://www.zhihu.com/#signin",headers=self.header,callback=self.login)]
-        # 解析abcd页面
-        print("已解析所有品牌页面")
-        return [scrapy.Request(self.start_urls,headers=self.header,callback=self.parse_total)]
+    # def start_requests(self):
+    #     #return [scrapy.Request("https://www.zhihu.com/#signin",headers=self.header,callback=self.login)]
+    #     # 解析abcd页面
+    #     print("已解析所有品牌页面")
+    #     return [scrapy.Request(self.start_urls,headers=self.header,callback=self.parse_total)]
 
 
-    def parse_total(self, response):
+    def parse(self, response):
         print("开始解析品牌索引页")
         pattern = '.*Aapparel.*'
         le = LinkExtractor(allow=pattern)
@@ -72,7 +71,7 @@ class amazonSpider(CrawlSpider):
         comm_links = comm_le.extract_links(response)
         for comm_link in comm_links:
             print("发现一个商品页：【%s】" %comm_link.url)
-            yield scrapy.Request(comm_link.url, headers=self.header, callback=self.parse)
+            yield scrapy.Request(comm_link.url, headers=self.header, callback=self.parse_shop)
         print("解析商品下页")
         next_pattern = '/s/ref=sr_pg_\d+.*'
         next_le = LinkExtractor(allow=next_pattern)
@@ -82,7 +81,7 @@ class amazonSpider(CrawlSpider):
             yield scrapy.Request(next_link.url, headers=self.header, callback=self.parse_comm)
 
 
-    def parse(self, response):
+    def parse_shop(self, response):
         shop_info_item = AmazonItem()
         # 商品ID
         shop_id = response.url.split("/")[4]

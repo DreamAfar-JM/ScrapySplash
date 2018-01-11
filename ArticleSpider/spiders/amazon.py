@@ -93,6 +93,7 @@ class amazonSpider(CrawlSpider,RedisSpider):
         title = response.xpath('//span[@id="productTitle"]/text()').extract_first().strip("                            \n")
         # 商品图url
         image_url = response.xpath('//div[@id="imgTagWrapperId"]/img/@src').extract_first()
+        price = response.xpath("//span[@id='priceblock_ourprice']/text()").extract_first()
         # 评价数
         comment_num = response.xpath('//span[@id="acrCustomerReviewText"]/text()').re_first("(\d+)")
         if comment_num:
@@ -105,7 +106,6 @@ class amazonSpider(CrawlSpider,RedisSpider):
             # request = scrapy.Request(comment_url, headers=self.header, callback=self.parse_comment)
             # request.meta['comment_num'] = int(comment_num)
             # request.meta['shop_id'] = shop_id
-
         else:
             star = 0
             comment_num = 0
@@ -116,6 +116,8 @@ class amazonSpider(CrawlSpider,RedisSpider):
         shop_info_item['image_url'] = image_url
         shop_info_item['comment_num'] = comment_num
         shop_info_item['star'] = star
+        shop_info_item['price'] = price
+        shop_info_item['response_text'] = response.text
         if comment_num:
             return [shop_info_item, scrapy.Request(comment_url, headers=self.header, callback=self.parse_comment)]
         else:
@@ -147,6 +149,7 @@ class amazonSpider(CrawlSpider,RedisSpider):
 
         # 评价数
         comment_num = int(response.xpath('//span[@data-hook="total-review-count"]/text()').extract_first())
+        comment_url = response.url
         page_url_base = "https://www.amazon.cn%s" %response.xpath('//li[@class="a-last"]/a/@href').re_first('(.*)\d+$')
         page = (comment_num + 9) // 10
         session = requests.Session()
@@ -184,7 +187,7 @@ class amazonSpider(CrawlSpider,RedisSpider):
         else:
             comment_sel = response.xpath("//div[@id='cm_cr-review_list']/div[@id]/div[@id]")
             for i in comment_sel:
-                commenter = i.xpath('./div[2]/span[1]/a/text()').extract_first()
+                commenter = i.xpath('./div[2]/span[1]/a/@href').extract_first().split('.')[-1]
                 # 评价内容
                 comment_text = "".join(i.xpath('./div[4]/span/text()').extract())
                 # 评价商品类型
@@ -213,6 +216,9 @@ class amazonSpider(CrawlSpider,RedisSpider):
         shop_comment_item['two_proportion'] = two_proportion
         shop_comment_item['one_proportion'] = one_proportion
         shop_comment_item['comment_text'] = comment_text_all
+        shop_comment_item['comment_response'] = response.text
+        shop_comment_item['comment_url'] = comment_url
+
         return shop_comment_item
 
 

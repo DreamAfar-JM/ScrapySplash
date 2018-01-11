@@ -586,6 +586,10 @@ class AmazonItem(scrapy.Item):
     comment_num = scrapy.Field()
     # 星级
     star = scrapy.Field()
+    # 价格
+    price = scrapy.Field()
+    # 商品源码
+    response_text = scrapy.Field()
     def get_insert_sql(self):
         shop_id = self["shop_id"]
         brand = self["brand"]
@@ -593,11 +597,13 @@ class AmazonItem(scrapy.Item):
         title = self["title"]
         image_url = self["image_url"]
         comment_num = self["comment_num"]
+        price = self["price"]
+        response_text = self["response_text"]
         star = self["star"]
         insert_sql = """
-               insert into Amazon(shop_id,brand,url,title,image_url,comment_num,star)  VALUES (%s,%s,%s,%s,%s,%s,%s)
+               insert into Amazon(shop_id,brand,url,title,image_url,comment_num,star,price,response_text)  VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)
            """
-        params = (shop_id,brand,url,title,image_url,comment_num,star)
+        params = (shop_id,brand,url,title,image_url,comment_num,star,price,response_text)
         return insert_sql, params
 
 class AmazonCommentItem(scrapy.Item):
@@ -612,6 +618,8 @@ class AmazonCommentItem(scrapy.Item):
     three_proportion = scrapy.Field()
     two_proportion = scrapy.Field()
     one_proportion = scrapy.Field()
+    comment_url = scrapy.Field()
+    comment_response = scrapy.Field()
     def get_insert_sql(self):
         shop_id = self["shop_id"]
         comment_text = self["comment_text"]
@@ -620,8 +628,10 @@ class AmazonCommentItem(scrapy.Item):
         three_proportion = self["three_proportion"]
         two_proportion = self["two_proportion"]
         one_proportion = self["one_proportion"]
+        comment_url = self["comment_url"]
+        comment_response = self["comment_response"]
         insert_sql = """
-               insert into AmazonComment(shop_id,comment_text,five_proportion,four_proportion,three_proportion,two_proportion,one_proportion)  VALUES (%s,%s,%s,%s,%s,%s,%s)
+               insert into AmazonComment(shop_id,comment_text,five_proportion,four_proportion,three_proportion,two_proportion,one_proportion,comment_url,comment_response)  VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)
            """
-        params = (shop_id,comment_text,five_proportion,four_proportion,three_proportion,two_proportion,one_proportion)
+        params = (shop_id,comment_text,five_proportion,four_proportion,three_proportion,two_proportion,one_proportion,comment_url,comment_response)
         return insert_sql, params

@@ -587,23 +587,28 @@ class AmazonItem(scrapy.Item):
     # 星级
     star = scrapy.Field()
     # 价格
-    price = scrapy.Field()
+    min_price = scrapy.Field()
+    max_price = scrapy.Field()
     # 商品源码
-    response_text = scrapy.Field()
+    # response_text = scrapy.Field()
+    # 商品排名
+    shop_rank = scrapy.Field()
     def get_insert_sql(self):
         shop_id = self["shop_id"]
         brand = self["brand"]
         url = self["url"]
         title = self["title"]
-        image_url = self["image_url"]
+        # image_url = self["image_url"]
         comment_num = self["comment_num"]
-        price = self["price"]
-        response_text = self["response_text"]
+        min_price = self["min_price"]
+        max_price = self["min_price"]
+        # response_text = self["response_text"]
         star = self["star"]
+        shop_rank = self["shop_rank"]
         insert_sql = """
-               insert into Amazon(shop_id,brand,url,title,image_url,comment_num,star,price,response_text)  VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)
+               insert into Amazon(shop_id,brand,url,title,comment_num,star,min_price,max_price,shop_rank)  VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)
            """
-        params = (shop_id,brand,url,title,image_url,comment_num,star,price,response_text)
+        params = (shop_id,brand,url,title,comment_num,star,min_price,max_price,shop_rank)
         return insert_sql, params
 
 class AmazonCommentItem(scrapy.Item):
@@ -619,7 +624,10 @@ class AmazonCommentItem(scrapy.Item):
     two_proportion = scrapy.Field()
     one_proportion = scrapy.Field()
     comment_url = scrapy.Field()
-    comment_response = scrapy.Field()
+    # comment_response = scrapy.Field()
+    comment_type = scrapy.Field()
+    commenter = scrapy.Field()
+    comment_star = scrapy.Field()
     def get_insert_sql(self):
         shop_id = self["shop_id"]
         comment_text = self["comment_text"]
@@ -629,9 +637,12 @@ class AmazonCommentItem(scrapy.Item):
         two_proportion = self["two_proportion"]
         one_proportion = self["one_proportion"]
         comment_url = self["comment_url"]
-        comment_response = self["comment_response"]
+        comment_type = self["comment_type"]
+        commenter = self["commenter"]
+        # comment_response = self["comment_response"]
+        comment_star = self["comment_star"]
         insert_sql = """
-               insert into AmazonComment(shop_id,comment_text,five_proportion,four_proportion,three_proportion,two_proportion,one_proportion,comment_url,comment_response)  VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)
+               insert into AmazonComment(shop_id,comment_text,five_proportion,four_proportion,three_proportion,two_proportion,one_proportion,comment_url,comment_type,commenter,comment_star)  VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
            """
-        params = (shop_id,comment_text,five_proportion,four_proportion,three_proportion,two_proportion,one_proportion,comment_url,comment_response)
+        params = (shop_id,comment_text,five_proportion,four_proportion,three_proportion,two_proportion,one_proportion,comment_url,comment_type,commenter,comment_star)
         return insert_sql, params

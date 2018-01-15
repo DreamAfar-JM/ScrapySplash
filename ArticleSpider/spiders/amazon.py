@@ -91,25 +91,33 @@ class amazonSpider(CrawlSpider,RedisSpider):
         # 品牌
         try:
             brand = response.xpath('//a[@id="brand"]/text()').extract_first().strip("                            \n")
-        except Exception:
+        except:
             brand = response.xpath('//a[@id="brand"]/@href').re_first('/(.*)/b\?')
         # 商品链接
         url = response.url
         # 商品名称
         try:
             title = response.xpath('//span[@id="productTitle"]/text()').extract_first().strip("                            \n")
-        except Exception:
+        except:
             title = "".join(response.xpath('//span[@id="productTitle"]/text()').re("[^\\s*|^\t|^\r|^\n]"))
         # 商品图url
         # image_url = response.xpath('//div[@id="imgTagWrapperId"]/img/@src').extract_first()
-        price = response.xpath("//span[@id='priceblock_ourprice']/text()").re("(\d+\.\d+)")
-        min_price = price[0]
-        max_price = price[-1]
+        try:
+            min_price = response.xpath("//span[@id='priceblock_ourprice']/text()").re("(\d+\.\d+)")[0]
+        except:
+            try:
+                min_price = response.xpath("//span[@id='priceblock_saleprice']/text()").re("(\d+\.\d+)")[0]
+                max_price = response.xpath("//span[@id='priceblock_saleprice']/text()").re("(\d+\.\d+)")[-1]
+            except:
+                return scrapy.Request(response.url, headers=self.header, callback=self.parse_shop)
+        else:
+            max_price = response.xpath("//span[@id='priceblock_ourprice']/text()").re("(\d+\.\d+)")[-1]
+
         # 评价数
         comment_num = response.xpath('//span[@id="acrCustomerReviewText"]/text()').re_first("(\d+)")
         try:
             shop_rank = "".join(response.xpath('//li[@id="SalesRank"]/text()').re("\d+"))
-        except Exception:
+        except:
             shop_rank = 0
         if comment_num:
             # 说明有评价数

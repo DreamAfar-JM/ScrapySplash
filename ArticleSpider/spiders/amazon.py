@@ -90,13 +90,16 @@ class amazonSpider(CrawlSpider,RedisSpider):
         shop_id = response.url.split("/")[4]
         # 品牌
         try:
-            brand = " ".join(response.xpath('//a[@id="brand"]/text()').re("([A-Za-zA-Z0-9]+)[\n^\s+]"))
+            brand = response.xpath('//a[@id="brand"]/text()').extract_first().strip("                            \n")
         except Exception:
             brand = response.xpath('//a[@id="brand"]/@href').re_first('/(.*)/b\?')
         # 商品链接
         url = response.url
         # 商品名称
-        title = " ".join(response.xpath("//span[@id='productTitle']/text()").re("([a-zA-Z0-9]+)[\n^\s+]"))
+        try:
+            title = response.xpath('//span[@id="productTitle"]/text()').extract_first().strip("                            \n")
+        except Exception:
+            title = "".join(response.xpath('//span[@id="productTitle"]/text()').re("[^\\s*|^\t|^\r|^\n]"))
         # 商品图url
         # image_url = response.xpath('//div[@id="imgTagWrapperId"]/img/@src').extract_first()
         price = response.xpath("//span[@id='priceblock_ourprice']/text()").re("(\d+\.\d+)")

@@ -109,6 +109,7 @@ class amazonSpider(CrawlSpider,RedisSpider):
                 min_price = response.xpath("//span[@id='priceblock_saleprice']/text()").re("(\d+\.\d+)")[0]
                 max_price = response.xpath("//span[@id='priceblock_saleprice']/text()").re("(\d+\.\d+)")[-1]
             except:
+                print("此链接为解析，没有response")
                 return scrapy.Request(response.url, headers=self.header, callback=self.parse_shop)
         else:
             max_price = response.xpath("//span[@id='priceblock_ourprice']/text()").re("(\d+\.\d+)")[-1]
@@ -240,4 +241,4 @@ class amazonSpider(CrawlSpider,RedisSpider):
         shop_comment_item['commenter'] = commenter
         shop_comment_item['comment_star'] = comment_star
 
-        return shop_comment_item
+        yield shop_comment_item

@@ -50,6 +50,7 @@ class MysqlTwistedPipline(object):
         print (failure)
 
     def do_insert(self,cursor,item):
+        print("写入数据库")
         insert_sql,params = item.get_insert_sql()
         cursor.execute(insert_sql,params)
 

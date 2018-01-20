@@ -67,7 +67,7 @@
 #                 links = rule.process_links(links)
 #             for link in links:
 #                 seen.add(link)
-#                 if 'html' in link.url:
+#                 if 'list' in link.url:
 #                     r = SplashRequest(url=link.url, endpoint='execute', args={'images': 0, 'lua_source': lua_script},cache_args=['lua_source'],callback=self._response_downloaded)
 #                 else:
 #                     r = Request(url=link.url, callback=self._response_downloaded)

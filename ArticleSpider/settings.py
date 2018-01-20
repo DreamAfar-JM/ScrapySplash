@@ -123,10 +123,10 @@ IMAGES_STORE = os.path.join(ProjectDir,"images")
 # MYSQL_USER = "wencai"
 # MYSQL_PASSWORD = "wencai"
 
-MYSQL_HOST = "101.200.87.104"
-MYSQL_DBNAME = "jtyd_data"
-MYSQL_USER = "jtyd_data"
-MYSQL_PASSWORD = "gfegsajla#*fdlj123"
+MYSQL_HOST = "xxx"
+MYSQL_DBNAME = "xxx"
+MYSQL_USER = "xxx"
+MYSQL_PASSWORD = "xxx"
 
 
 SQL_DATETIME_FORMAT = "%Y-%m-%d %H:%M:%S"

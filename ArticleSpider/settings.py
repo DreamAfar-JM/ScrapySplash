@@ -52,7 +52,7 @@ ROBOTSTXT_OBEY = False
 SPIDER_MIDDLEWARES = {
 #    'ArticleSpider.middlewares.ArticlespiderSpiderMiddleware': 543,
     # 启用SplashDeduplicateArgsMiddleware中间件
-    # 'scrapy_splash.SplashDeduplicateArgsMiddleware': 100,
+    'scrapy_splash.SplashDeduplicateArgsMiddleware': 100,
 }
 
 # Enable or disable downloader middlewares
@@ -62,9 +62,9 @@ DOWNLOADER_MIDDLEWARES = {
     'ArticleSpider.middlewares.RandomUserAgentMiddlware': 3,
     #'ArticleSpider.middlewares.RandomProxyMiddlware': 2,
     # splash 所用
-    # 'scrapy_splash.SplashCookiesMiddleware': 723,
-    # 'scrapy_splash.SplashMiddleware': 725,
-    # 'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware': 810,
+    'scrapy_splash.SplashCookiesMiddleware': 723,
+    'scrapy_splash.SplashMiddleware': 725,
+    'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware': 810,
 
 }
 
@@ -123,10 +123,10 @@ IMAGES_STORE = os.path.join(ProjectDir,"images")
 # MYSQL_USER = "wencai"
 # MYSQL_PASSWORD = "wencai"
 
-MYSQL_HOST = "x4"
-MYSQL_DBNAME = "x"
-MYSQL_USER = "x"
-MYSQL_PASSWORD = "x"
+MYSQL_HOST = "101.200.87.104"
+MYSQL_DBNAME = "jtyd_data"
+MYSQL_USER = "jtyd_data"
+MYSQL_PASSWORD = "gfegsajla#*fdlj123"
 
 
 SQL_DATETIME_FORMAT = "%Y-%m-%d %H:%M:%S"

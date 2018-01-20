@@ -51,7 +51,10 @@ class JdAllSpider(RedisSpider, CrawlSpider):
             comment_url = "https://club.jd.com/comment/skuProductPageComments.action?productId={shop_id}&score=0&sortType=5&page={page_num}&pageSize=10&isShadowSku=0&fold=1".format(shop_id=shop_id,page_num=0)
             html = session.get(comment_url, headers=self.header)
             print("获取商品评价页 json")
-            comment_json = json.loads(html.text)
+            try:
+                comment_json = json.loads(html.text)
+            except:
+                continue
             # 获取评价信息
             public_comment = comment_json['productCommentSummary']
             # 评价数

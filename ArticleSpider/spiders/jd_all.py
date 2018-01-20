@@ -25,7 +25,7 @@ class JdAllSpider(RedisSpider, CrawlSpider):
         'Upgrade-Insecure-Requests': '1',
         'User-Agent': 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.221 Safari/537.36 SE 2.X MetaSr 1.0',
         'Accept-Encoding': 'gzip, deflate, sdch',
-        'Accept-Language': 'zh-CN,zh;q=0.8'
+        'Accept-Language': 'zh-CN,zh;q=0.8',
     }
     rules = {
         # 商品列表
@@ -94,6 +94,8 @@ class JdAllSpider(RedisSpider, CrawlSpider):
                 'default_comment_num': default_comment_num,
             }
             page_num = (comment_num + 9) // 10
+            if page_num >= 100:
+                page_num = 100
             print("%s评价页面共计%s" %(title,page_num))
             for page in range(0,page_num):
                 comment_url = "https://club.jd.com/comment/skuProductPageComments.action?productId={shop_ids}&score=0&sortType=5&page={page_nums}&pageSize=10&isShadowSku=0&fold=1".format(shop_ids=shop_id,page_nums=page)

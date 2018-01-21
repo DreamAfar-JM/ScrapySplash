@@ -29,7 +29,7 @@ class JdAllSpider(RedisSpider, CrawlSpider):
     }
     rules = {
         # 商品列表
-        Rule(LinkExtractor(allow=r'https://list\.jd\.com/list\.html\?cat=.*'), follow=True,callback="parse_shop"),
+        Rule(LinkExtractor(allow=r'https://list\.jd\.com/list\.html\?cat=.*'), follow=False,callback="parse_shop"),
         # 匹配商品
         # Rule(LinkExtractor(allow=r'.*item\.jd\.com/\d+\.html$'), callback="parse_shop",follow=True),
         # 匹配下一页
@@ -43,7 +43,7 @@ class JdAllSpider(RedisSpider, CrawlSpider):
             url = "http:%s" %sel.css(".p-name a::attr('href')").extract_first()
             shop_id = url.split("/")[-1].split(".")[0]
             title = sel.css(".p-name a em::text").extract_first().strip("\n").strip(" ")
-            brand = sel.css(".p-shop ::attr('data-shop_name')").extract_first()
+            brand = sel.css(".p-shop span a::attr('title')").extract_first()
             brand_url = sel.css(".p-shop span a::attr('href')").extract_first()
             price = sel.css(".p-price strong i::text").extract_first()
             session = requests.Session()
@@ -96,11 +96,11 @@ class JdAllSpider(RedisSpider, CrawlSpider):
             page_num = (comment_num + 9) // 10
             if page_num >= 100:
                 page_num = 100
-            print("%s评价页面共计%s" %(title,page_num))
+            print("【%s】评价页面共计【%s】" %(title,page_num))
             for page in range(0,page_num):
                 comment_url = "https://club.jd.com/comment/skuProductPageComments.action?productId={shop_ids}&score=0&sortType=5&page={page_nums}&pageSize=10&isShadowSku=0&fold=1".format(shop_ids=shop_id,page_nums=page)
                 print("yield评价第%s页"%page)
-                yield  scrapy.Request(comment_url,meta=shop_info,headers=self.header)
+                yield scrapy.Request(comment_url,meta=shop_info,headers=self.header,callback="parse_comment")
 
 
     def parse_comment(self,response):
@@ -133,7 +133,10 @@ class JdAllSpider(RedisSpider, CrawlSpider):
             if comment_source == []:
                 comment_source = "非手机端"
             # 型号
-            produce_size = comment['productSize']
+            try:
+                produce_size = comment['productSize']
+            except:
+                produce_size = []
             # 颜色
             produce_color = comment['productColor']
             # 用户级别

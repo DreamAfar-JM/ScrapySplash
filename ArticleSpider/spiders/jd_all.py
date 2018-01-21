@@ -8,13 +8,22 @@ sys.path.insert(0, ProjectDir)
 import scrapy
 import json
 import requests
+from scrapy_splash import SplashRequest
 from scrapy.linkextractors import LinkExtractor
 # from scrapy.spiders import Rule,CrawlSpider
 from scrapy.spiders.splashcrawl import Rule,CrawlSpider
 from ArticleSpider.scrapy_redis_plus.spiders import RedisSpider
 from ArticleSpider.items import JDAllItem
 
-class JdAllSpider(RedisSpider, CrawlSpider):
+lua_script = """
+function main(splash)
+    splash:go(splash.args.url)
+    splash:wait(0.5)
+    return splash:html()
+end
+"""
+
+class JdAllSpider(RedisSpider):
     name = "jd_all"
     redis_key = "jd:start_urls"
     allowed_domains = ["jd.com"]
@@ -27,14 +36,21 @@ class JdAllSpider(RedisSpider, CrawlSpider):
         'Accept-Encoding': 'gzip, deflate, sdch',
         'Accept-Language': 'zh-CN,zh;q=0.8',
     }
-    rules = {
-        # 商品列表
-        Rule(LinkExtractor(allow=r'https://list\.jd\.com/list\.html\?cat=.*'), follow=False,callback="parse_shop"),
-        # 匹配商品
-        # Rule(LinkExtractor(allow=r'.*item\.jd\.com/\d+\.html$'), callback="parse_shop",follow=True),
-        # 匹配下一页
-        Rule(LinkExtractor(restrict_css='a.pn-next'), follow=True,callback="parse_shop"),
-    }
+    # rules = {
+    #     # 商品列表
+    #     Rule(LinkExtractor(allow=r'https://list\.jd\.com/list\.html\?cat=.*'), follow=False,callback="parse_shop"),
+    #     # 匹配商品
+    #     # Rule(LinkExtractor(allow=r'.*item\.jd\.com/\d+\.html$'), callback="parse_shop",follow=True),
+    #     # 匹配下一页
+    #     Rule(LinkExtractor(restrict_css='a.pn-next'), follow=True,callback="parse_shop"),
+    # }
+    def parse(self,response):
+        # 解析list链接
+        pattern = "https://list\.jd\.com/list\.html\?cat=.*"
+        le = LinkExtractor(allow=pattern)
+        links = le.extract_links(response)
+        for i in links:
+            yield SplashRequest(i.url, endpoint='execute', args={'images': 0, 'lua_source': lua_script},cache_args=['lua_source'],callback=self.parse_shop)
 
     def parse_shop(self, response):
         sel_list = response.xpath('//div[@id="plist"]').xpath('.//li[@class="gl-item"]')
@@ -101,7 +117,15 @@ class JdAllSpider(RedisSpider, CrawlSpider):
                 comment_url = "https://club.jd.com/comment/skuProductPageComments.action?productId={shop_ids}&score=0&sortType=5&page={page_nums}&pageSize=10&isShadowSku=0&fold=1".format(shop_ids=shop_id,page_nums=page)
                 print("yield评价第%s页"%page)
                 yield scrapy.Request(comment_url,meta=shop_info,headers=self.header,callback="parse_comment")
-
+        # 解析下一页
+        print("开始获取下一页")
+        next_le = LinkExtractor(restrict_css='a.pn-next')
+        # next_le = LinkExtractor(restrict_css='a.pn-next')
+        print("已获取下页连接")
+        next_links = next_le.extract_links(response)
+        for next in next_links:
+            print("yield下页连接：【%s】"%next.url)
+            yield SplashRequest(next.url, endpoint='execute', args={'images': 0, 'lua_source': lua_script},cache_args=['lua_source'], callback=self.parse_shop)
 
     def parse_comment(self,response):
         print("开始解析评价")

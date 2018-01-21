@@ -123,10 +123,6 @@ IMAGES_STORE = os.path.join(ProjectDir,"images")
 # MYSQL_USER = "wencai"
 # MYSQL_PASSWORD = "wencai"
 
-MYSQL_HOST = "101.200.87.104"
-MYSQL_DBNAME = "jtyd_data"
-MYSQL_USER = "jtyd_data"
-MYSQL_PASSWORD = "gfegsajla#*fdlj123"
 
 
 SQL_DATETIME_FORMAT = "%Y-%m-%d %H:%M:%S"
@@ -145,20 +141,20 @@ AUTOTHROTTLE_ENABLED = True
 
 
 # #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
-# SCHEDULER = "scrapy_redis.scheduler.Scheduler"
-# REDIS_URL = 'redis://192.168.1.241:6379'
-# DUPEFILTER_CLASS = "scrapy_redis.dupefilter.RFPDupeFilter"
-# REDIS_HOST = "192.168.1.241"
-# REDIS_PORT = 6379
-SCHEDULER_PERSIST = True
-# REDIS_DB_INDEX = 1
-# FILTER_URL = None
-FILTER_HOST = '192.168.1.241'
-FILTER_PORT = 6379
-FILTER_DB = 0
-SCHEDULER = "ArticleSpider.scrapy_redis_plus.scheduler.Scheduler"
+SCHEDULER = "scrapy_redis.scheduler.Scheduler"
 REDIS_URL = 'redis://192.168.1.241:6379'
-DUPEFILTER_CLASS = "ArticleSpider.scrapy_redis_plus.dupefilter.RFPDupeFilter"
+DUPEFILTER_CLASS = "scrapy_redis.dupefilter.RFPDupeFilter"
+REDIS_HOST = "192.168.1.241"
+REDIS_PORT = 6379
+SCHEDULER_PERSIST = True
+REDIS_DB_INDEX = 1
+# FILTER_URL = None
+# FILTER_HOST = '192.168.1.241'
+# FILTER_PORT = 6379
+# FILTER_DB = 0
+# SCHEDULER = "ArticleSpider.scrapy_redis_plus.scheduler.Scheduler"
+# REDIS_URL = 'redis://192.168.1.241:6379'
+# DUPEFILTER_CLASS = "ArticleSpider.scrapy_redis_plus.dupefilter.RFPDupeFilter"
 # REDIS_QUEUE_NAME = 'OneName'   # 如果不设置或者设置为None，则使用默认的，每个spider使用不同的去重队列和种子队列。如果设置了，则不同spider共用去重队列和种子队列
 #
 # """

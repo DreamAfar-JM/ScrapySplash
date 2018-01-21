@@ -12,7 +12,7 @@ from scrapy_splash import SplashRequest
 from scrapy.linkextractors import LinkExtractor
 # from scrapy.spiders import Rule,CrawlSpider
 from scrapy.spiders.splashcrawl import Rule,CrawlSpider
-from ArticleSpider.scrapy_redis_plus.spiders import RedisSpider
+from scrapy_redis.spiders import RedisSpider
 from ArticleSpider.items import JDAllItem
 
 lua_script = """
@@ -51,7 +51,16 @@ class JdAllSpider(RedisSpider):
         links = le.extract_links(response)
         for i in links:
             print("-------------------->%s" %i.url)
-            yield SplashRequest(i.url, endpoint='execute', args={'images': 0, 'lua_source': lua_script},cache_args=['lua_source'],callback=self.parse_shop)
+            yield scrapy.Request(i.url, headers=self.header,callback=self.next_page,dont_filter=True)
+            #yield SplashRequest(i.url, endpoint='execute', args={'images': 0, 'lua_source': lua_script},cache_args=['lua_source'], callback=self.parse_shop)
+    def next_page(self,response):
+        # 获取page total
+        page_total = int(response.css('span.fp-text i::text').extract_first())
+        print("开始获取下一页")
+        for page in range(1,page_total + 1):
+            page_url = "%s&page=%s" %(response.url,page)
+            print("获取list：【%s】，第【%s】页。"%(response.url, page))
+            yield SplashRequest(page_url, endpoint='execute', args={'images': 0, 'lua_source': lua_script},cache_args=['lua_source'], callback=self.parse_shop,dont_filter=True)
 
     def parse_shop(self, response):
         sel_list = response.xpath('//div[@id="plist"]').xpath('.//li[@class="gl-item"]')
@@ -118,15 +127,7 @@ class JdAllSpider(RedisSpider):
                 comment_url = "https://club.jd.com/comment/skuProductPageComments.action?productId={shop_ids}&score=0&sortType=5&page={page_nums}&pageSize=10&isShadowSku=0&fold=1".format(shop_ids=shop_id,page_nums=page)
                 print("yield评价第%s页"%page)
                 yield scrapy.Request(comment_url,meta=shop_info,headers=self.header,callback=self.parse_comment)
-        # 解析下一页
-        print("开始获取下一页")
-        next_le = LinkExtractor(restrict_css='a.pn-next')
-        # next_le = LinkExtractor(restrict_css='a.pn-next')
-        print("**********************已获取下页连接************************************")
-        next_links = next_le.extract_links(response)
-        for next in next_links:
-            print("yield下页连接：【%s】"%next.url)
-            yield SplashRequest(next.url, endpoint='execute', args={'images': 0, 'lua_source': lua_script},cache_args=['lua_source'], callback=self.parse_shop)
+
 
     def parse_comment(self,response):
         print("开始解析评价")

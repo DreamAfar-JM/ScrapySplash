@@ -50,6 +50,7 @@ class JdAllSpider(RedisSpider):
         le = LinkExtractor(allow=pattern)
         links = le.extract_links(response)
         for i in links:
+            print("-------------------->%s" %i.url)
             yield SplashRequest(i.url, endpoint='execute', args={'images': 0, 'lua_source': lua_script},cache_args=['lua_source'],callback=self.parse_shop)
 
     def parse_shop(self, response):
@@ -116,12 +117,12 @@ class JdAllSpider(RedisSpider):
             for page in range(0,page_num):
                 comment_url = "https://club.jd.com/comment/skuProductPageComments.action?productId={shop_ids}&score=0&sortType=5&page={page_nums}&pageSize=10&isShadowSku=0&fold=1".format(shop_ids=shop_id,page_nums=page)
                 print("yield评价第%s页"%page)
-                yield scrapy.Request(comment_url,meta=shop_info,headers=self.header,callback="parse_comment")
+                yield scrapy.Request(comment_url,meta=shop_info,headers=self.header,callback=self.parse_comment)
         # 解析下一页
         print("开始获取下一页")
         next_le = LinkExtractor(restrict_css='a.pn-next')
         # next_le = LinkExtractor(restrict_css='a.pn-next')
-        print("已获取下页连接")
+        print("**********************已获取下页连接************************************")
         next_links = next_le.extract_links(response)
         for next in next_links:
             print("yield下页连接：【%s】"%next.url)
@@ -142,69 +143,91 @@ class JdAllSpider(RedisSpider):
         poor_count = response.meta.get("poor_count")
         hot_comment_dict = response.meta.get("hot_comment_dict")
         default_comment_num = response.meta.get("default_comment_num")
-        comment_json = json.loads(response.text)
-        comment_info = comment_json['comments']
-        for comment in comment_info:
-            JDItem = JDAllItem()
-            # 主键 评论ID
-            comment_id = comment['id']
-            comment_context = comment['content']
-            comnent_time = comment['creationTime']
-            # 用户评分
-            comment_score = comment['score']
-            # 来源
-            comment_source = comment['userClientShow']
-            if comment_source == []:
-                comment_source = "非手机端"
-            # 型号
-            try:
-                produce_size = comment['productSize']
-            except:
-                produce_size = []
-            # 颜色
-            produce_color = comment['productColor']
-            # 用户级别
-            user_level = comment['userLevelName']
-            # 用户京享值
-            user_exp = comment['userExpValue']
-            # 评价点赞数
-            comment_thumpup = comment['usefulVoteCount']
-            # 店铺回复
-            try:
-                comment_reply = comment['replies']
-            except:
-                comment_reply = []
-            if len(comment_reply) == 0:
-                comment_reply_content = "Null"
-                comment_reply_time = "Null"
-            else:
-                comment_reply_content = comment_reply[0]["content"]
-                comment_reply_time = comment_reply[0]["creationTime"]
-            JDItem["shop_id"] = shop_id
-            JDItem["url"] = url
-            JDItem["title"] = title
-            JDItem["brand"] = brand
-            JDItem["brand_url"] = brand_url
-            JDItem["price"] = price
-            JDItem["comment_num"] = comment_num
-            JDItem["good_comment_rate"] = good_comment_rate
-            JDItem["good_comment"] = good_comment
-            JDItem["general_count"] = general_count
-            JDItem["poor_count"] = poor_count
-            JDItem["hot_comment_dict"] = hot_comment_dict
-            JDItem["default_comment_num"] = default_comment_num
-            JDItem["comment_id"] = comment_id
-            JDItem["comment_context"] = comment_context
-            JDItem["comnent_time"] = comnent_time
-            JDItem["comment_score"] = comment_score
-            JDItem["comment_source"] = comment_source
-            JDItem["produce_size"] = produce_size
-            JDItem["produce_color"] = produce_color
-            JDItem["user_level"] = user_level
-            JDItem["user_exp"] = user_exp
-            JDItem["comment_thumpup"] = comment_thumpup
-            JDItem["comment_reply_content"] = comment_reply_content
-            JDItem["comment_reply_time"] = comment_reply_time
-            print("yield评价")
-            yield  JDItem
+        try:
+            comment_json = json.loads(response.text)
+        except:
+            shop_info = {
+                'url': url,
+                'shop_id': shop_id,
+                'title': title,
+                'brand': brand,
+                'brand_url': brand_url,
+                'price': price,
+                'comment_num': comment_num,
+                'good_comment_rate': good_comment_rate,
+                'good_comment': good_comment,
+                'general_count': general_count,
+                'poor_count': poor_count,
+                'hot_comment_dict': hot_comment_dict,
+                'default_comment_num': default_comment_num,
+            }
+            yield scrapy.Request(response.url,meta=shop_info,headers=self.header,callback=self.parse_comment)
+        else:
+            comment_info = comment_json['comments']
+            for comment in comment_info:
+                JDItem = JDAllItem()
+                # 主键 评论ID
+                comment_id = comment['id']
+                comment_context = comment['content']
+                comnent_time = comment['creationTime']
+                # 用户评分
+                comment_score = comment['score']
+                # 来源
+                comment_source = comment['userClientShow']
+                if comment_source == []:
+                    comment_source = "非手机端"
+                # 型号
+                try:
+                    produce_size = comment['productSize']
+                except:
+                    produce_size = "None"
+                # 颜色
+                try:
+                    produce_color = comment['productColor']
+                except:
+                    produce_color = "None"
+                # 用户级别
+                user_level = comment['userLevelName']
+                # 用户京享值
+                user_exp = comment['userExpValue']
+                # 评价点赞数
+                comment_thumpup = comment['usefulVoteCount']
+                # 店铺回复
+                try:
+                    comment_reply = comment['replies']
+                except:
+                    comment_reply = []
+                if len(comment_reply) == 0:
+                    comment_reply_content = "Null"
+                    comment_reply_time = "Null"
+                else:
+                    comment_reply_content = comment_reply[0]["content"]
+                    comment_reply_time = comment_reply[0]["creationTime"]
+                JDItem["shop_id"] = shop_id
+                JDItem["url"] = url
+                JDItem["title"] = title
+                JDItem["brand"] = brand
+                JDItem["brand_url"] = brand_url
+                JDItem["price"] = price
+                JDItem["comment_num"] = comment_num
+                JDItem["good_comment_rate"] = good_comment_rate
+                JDItem["good_comment"] = good_comment
+                JDItem["general_count"] = general_count
+                JDItem["poor_count"] = poor_count
+                JDItem["hot_comment_dict"] = hot_comment_dict
+                JDItem["default_comment_num"] = default_comment_num
+                JDItem["comment_id"] = comment_id
+                JDItem["comment_context"] = comment_context
+                JDItem["comnent_time"] = comnent_time
+                JDItem["comment_score"] = comment_score
+                JDItem["comment_source"] = comment_source
+                JDItem["produce_size"] = produce_size
+                JDItem["produce_color"] = produce_color
+                JDItem["user_level"] = user_level
+                JDItem["user_exp"] = user_exp
+                JDItem["comment_thumpup"] = comment_thumpup
+                JDItem["comment_reply_content"] = comment_reply_content
+                JDItem["comment_reply_time"] = comment_reply_time
+                print("yield评价")
+                yield  JDItem
 

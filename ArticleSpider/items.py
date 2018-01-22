@@ -683,6 +683,8 @@ class JDAllItem(scrapy.Item):
     # 商家回复
     comment_reply_content = scrapy.Field()
     comment_reply_time = scrapy.Field()
+    append_comment = scrapy.Field()
+    append_comment_time = scrapy.Field()
 
     def get_insert_sql(self):
         shop_id = self["shop_id"]

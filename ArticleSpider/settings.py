@@ -86,7 +86,7 @@ ITEM_PIPELINES = {
     # 'ArticleSpider.pipelines.MysqlPipeline': 1,
     #异步保存数据到mysql
     'ArticleSpider.pipelines.MysqlTwistedPipline': 404,
-    # 'scrapy_redis.pipelines.RedisPipeline' : 300,
+    'scrapy_redis.pipelines.RedisPipeline' : 300,
     # 'ArticleSpider.pipelines.saveToRedisPipeline': 404,
     #保存数据到es
     #'ArticleSpider.pipelines.ESPiplines': 1,

@@ -201,6 +201,12 @@ class JdAllSpider(RedisSpider):
                     produce_color = "None"
                 # 用户级别
                 user_level = comment['userLevelName']
+                try:
+                    append_comment = comment['afterUserComment']['hAfterUserComment']['content']
+                    append_comment_time = comment['afterUserComment']['created']
+                except:
+                    append_comment = "无追加"
+                    append_comment_time = "None"
                 # 用户京享值
                 user_exp = comment['userExpValue']
                 # 评价点赞数
@@ -241,6 +247,8 @@ class JdAllSpider(RedisSpider):
                 JDItem["comment_thumpup"] = comment_thumpup
                 JDItem["comment_reply_content"] = comment_reply_content
                 JDItem["comment_reply_time"] = comment_reply_time
+                JDItem["append_comment"] = append_comment
+                JDItem["append_comment_time"] = append_comment_time
                 print("yield评价")
                 yield  JDItem
 

@@ -710,10 +710,16 @@ class JDAllItem(scrapy.Item):
         comment_thumpup = self["comment_thumpup"]
         comment_reply_content = self["comment_reply_content"]
         comment_reply_time = self["comment_reply_time"]
+        append_comment = self["append_comment"]
+        append_comment_time = self["append_comment_time"]
 
         insert_sql = """
-               insert into JDAll(shop_id,url,title,brand,brand_url,price,comment_num,good_comment_rate,good_comment,general_count,poor_count,hot_comment_dict,default_comment_num,comment_id,comment_context,comnent_time,comment_score,comment_source,produce_size,produce_color,user_level,user_exp,comment_thumpup,comment_reply_content,comment_reply_time)  VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
-           """
-        params = (shop_id,url,title,brand,brand_url,price,comment_num,good_comment_rate,good_comment,general_count,poor_count,hot_comment_dict,default_comment_num,comment_id,comment_context,comnent_time,comment_score,comment_source,produce_size,produce_color,user_level,user_exp,comment_thumpup,comment_reply_content,comment_reply_time)
+                       insert into JDAll(shop_id,url,title,brand,brand_url,price,comment_num,good_comment_rate,good_comment,general_count,poor_count,hot_comment_dict,default_comment_num,comment_id,comment_context,comnent_time,comment_score,comment_source,produce_size,produce_color,user_level,user_exp,comment_thumpup,comment_reply_content,comment_reply_time,append_comment,append_comment_time)  VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
+                   """
+        params = (
+        shop_id, url, title, brand, brand_url, price, comment_num, good_comment_rate, good_comment, general_count,
+        poor_count, hot_comment_dict, default_comment_num, comment_id, comment_context, comnent_time, comment_score,
+        comment_source, produce_size, produce_color, user_level, user_exp, comment_thumpup, comment_reply_content,
+        comment_reply_time, append_comment, append_comment_time)
         print("return SQL 语句")
         return insert_sql, params

@@ -36,6 +36,16 @@ class JdAllSpider(RedisSpider):
         'Accept-Encoding': 'gzip, deflate, sdch',
         'Accept-Language': 'zh-CN,zh;q=0.8',
     }
+    list_header = {
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+        'Accept-Encoding': 'gzip, deflate, sdch',
+        'Accept-Language': 'zh-CN,zh;q=0.8',
+        'Cache-Control': 'max-age=0',
+        'Connection': 'keep-alive',
+        'Host': 'list.jd.com',
+        'If-Modified-Since': 'Mon, 22 Jan 2018 06:23:20 GMT',
+        'Upgrade-Insecure-Requests': '1'
+    }
     # rules = {
     #     # 商品列表
     #     Rule(LinkExtractor(allow=r'https://list\.jd\.com/list\.html\?cat=.*'), follow=False,callback="parse_shop"),
@@ -49,9 +59,10 @@ class JdAllSpider(RedisSpider):
         pattern = "https://list\.jd\.com/list\.html\?cat=.*"
         le = LinkExtractor(allow=pattern)
         links = le.extract_links(response)
+        print("发现list页面共：【%s】" %len(links))
         for i in links:
             print("-------------------->%s" %i.url)
-            yield scrapy.Request(i.url, headers=self.header,callback=self.next_page,dont_filter=True)
+            yield scrapy.Request(i.url,callback=self.next_page)
             #yield SplashRequest(i.url, endpoint='execute', args={'images': 0, 'lua_source': lua_script},cache_args=['lua_source'], callback=self.parse_shop)
     def next_page(self,response):
         # 获取page total
@@ -60,7 +71,8 @@ class JdAllSpider(RedisSpider):
         for page in range(1,page_total + 1):
             page_url = "%s&page=%s" %(response.url,page)
             print("获取list：【%s】，第【%s】页。"%(response.url, page))
-            yield SplashRequest(page_url, endpoint='execute', args={'images': 0, 'lua_source': lua_script},cache_args=['lua_source'], callback=self.parse_shop,dont_filter=True)
+            yield SplashRequest(page_url, args={'wait': 0.5, 'images': 0}, callback=self.parse_shop,splash_headers=self.header)
+            # yield SplashRequest(page_url, endpoint='execute', args={'images': 0, 'lua_source': lua_script},cache_args=['lua_source'], callback=self.parse_shop,dont_filter=True)
 
     def parse_shop(self, response):
         sel_list = response.xpath('//div[@id="plist"]').xpath('.//li[@class="gl-item"]')

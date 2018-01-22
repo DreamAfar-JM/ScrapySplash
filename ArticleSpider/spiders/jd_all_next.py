@@ -38,7 +38,7 @@ class JdAllSpider(RedisSpider,CrawlSpider):
     }
     rules = {
         # 商品列表
-        Rule(LinkExtractor(allow=r'https://list\.jd\.com/list\.html\?cat=.*'), follow=True),
+        Rule(LinkExtractor(allow=r'https://list\.jd\.com/list\.html\?cat=.*')),
         # 匹配商品
         # Rule(LinkExtractor(allow=r'.*item\.jd\.com/\d+\.html$'), callback="parse_shop",follow=True),
         # 匹配下一页

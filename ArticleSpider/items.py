@@ -763,7 +763,7 @@ class ALIExpressItem(scrapy.Item):
         shop_info = self["shop_info"]
         shop_star = self["shop_star"]
         shop_comment_num = self["shop_comment_num"]
-        order_num = self["order"]
+        order_num = self["order_num"]
 
         insert_sql = """
                        insert into ALIExpress(shop_url,shop_cate_url,shop_id,owner_member_id,shop_title,brand,store_url,store_name,store_address,min_price,max_price,min_discount_price,max_discount_price,shop_info,shop_star,shop_comment_num,order_num)  VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)

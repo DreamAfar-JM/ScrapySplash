@@ -65,8 +65,11 @@ class AliexpressSpider(RedisSpider):
         links = cate_le.extract_links(response)
         print("获取商品分类共计：【%s】" %len(links))
         for link in links:
-            print("下载商品分类页：【%s】" %link.url)
-            yield scrapy.Request(link.url,headers=self.cate_header,callback=self.parse_cate)
+            if "isCates=y" in link.url:
+                yield scrapy.Request(link.url, callback=self.parse)
+            else:
+                print("下载商品分类页：【%s】" %link.url)
+                yield scrapy.Request(link.url,headers=self.cate_header,callback=self.parse_cate)
 
     def parse_cate(self, response):
         shop_header = {
@@ -98,6 +101,7 @@ class AliexpressSpider(RedisSpider):
             print("下载下页")
             next_links = next_le.extract_links(response)
             next_url = next_links[0].url
+            print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>已被yield")
             yield scrapy.Request(next_url, headers=self.cate_header, callback=self.parse_cate)
 
     def parse_shop(self, response):

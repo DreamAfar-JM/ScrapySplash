@@ -114,11 +114,11 @@ class AliexpressSpider(RedisSpider):
         store_name = response.xpath("//a[@class='store-lnk']/@title").extract_first()
         store_address = response.xpath("//dd[@class='store-address']/text()").extract_first().strip("\n").strip("\t")
         min_price = response.xpath("//span[@id='j-sku-price']//text()").re("(\d+.\d+)")[0]
-        max_price = response.xpath("//span[@id='j-sku-price']//text()").re("(\d+.\d+)")[1]
+        max_price = response.xpath("//span[@id='j-sku-price']//text()").re("(\d+.\d+)")[-1]
         discount_price = response.xpath("//span[@id='j-sku-discount-price']//text()").re("(\d+.\d+)")
         try:
             min_discount_price = discount_price[0]
-            max_discount_price = discount_price[1]
+            max_discount_price = discount_price[-1]
         except:
             min_discount_price = "None"
             max_discount_price = "None"
@@ -128,6 +128,7 @@ class AliexpressSpider(RedisSpider):
         #     shop_color = "None"
         shop_info = {}
         shop_info_ele = response.xpath("//div[@id='j-product-info-sku']/dl")
+        print("解析商品info")
         for i in shop_info_ele:
             key = i.xpath("./dt/text()").extract_first().strip(":")
             if key == 'Color':
@@ -190,23 +191,34 @@ class AliexpressSpider(RedisSpider):
             page_num = (int(shop_comment_num) + 9) // 10
             comment_base_url = "https://feedback.aliexpress.com/display/productEvaluation.htm?productId={shop_id}&ownerMemberId={member_id}".format(shop_id=shop_id,member_id=owner_member_id)
             # yield ALIItem, self.parse_comment(shop_id,page_num,comment_base_url)
+            print("商品有评价【%s】条，yield商品和评价"%shop_comment_num)
             yield ALIItem,  self.parse_comment(shop_id,page_num,comment_base_url)
         else:
+            print(">>>>>>>>>>>>>>>>>>>>>>>>>>商品无评价，直接yield商品信息")
             yield ALIItem
     def parse_comment(self,shop_id,page_num, comment_base_url):
-        browser = webdriver.PhantomJS(executable_path="D:/python/scrapy/scrapy/tools/phantomjs-2.1.1-windows/phantomjs-2.1.1-windows/bin/phantomjs.exe")
+        print("开始解析评价，创建browser")
+        # browser = webdriver.PhantomJS(executable_path="D:/python/scrapy/scrapy/tools/phantomjs-2.1.1-windows/phantomjs-2.1.1-windows/bin/phantomjs.exe")
+        # linux
+        browser = webdriver.PhantomJS("phantomjs")
+        print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>打开页面")
         browser.get(comment_base_url)
         comment_index_response = HtmlResponse(url=browser.current_url, body=browser.page_source, encoding="utf-8")
         yield self.yield_comment(comment_index_response,shop_id)
         if page_num >= 1:
+            print("评价页数为【%s】超过1，开始点击下页" %page_num)
             for i in range(page_num):
                 browser.find_element_by_css_selector(".ui-pagination-next.ui-goto-page").click()
+                print("已点击第【%s】页" %i+1)
                 new_response = HtmlResponse(url=browser.current_url, body=browser.page_source, encoding="utf-8")
+                print("新response已创建，准备yield")
                 yield self.yield_comment(new_response,shop_id)
+        print("此商品评价页面已经全部yield，退出关闭browser")
         browser.quit()
 
     def yield_comment(self,response,shop_id):
         ALIEComment = ALIExpressCommentItem()
+        print("开始解析页数不为1的评价")
         shop_id = shop_id
         comment_le = response.xpath("//div[@class='feedback-list-wrap']//div[@class='feedback-item clearfix']")
         for i in comment_le:
@@ -242,5 +254,6 @@ class AliexpressSpider(RedisSpider):
             ALIEComment['append_comment_time'] = append_comment_time
             ALIEComment['replay_text'] = replay_text
             ALIEComment['replay_text_time'] = replay_text_time
+            print("yield 评价")
             yield ALIEComment
             # print(ALIEComment)

@@ -83,3 +83,16 @@ class RandomUserAgentMiddlware(object):
 
 
 # 使用浏览器cookie登陆
+# from selenium import webdriver
+# from scrapy.http import HtmlResponse
+# class JSPageMiddleware(object):
+#     #通过chrome请求动态网页
+#     def process_request(self, request, spider):
+#         if spider.name == "aliexpress":
+#             # browser = webdriver.Chrome(executable_path="D:/Temp/chromedriver.exe")
+#             spider.browser.get(request.url)
+#             import time
+#             time.sleep(1)
+#             print ("访问:{0}".format(request.url))
+#
+#             return HtmlResponse(url=spider.browser.current_url, body=spider.browser.page_source, encoding="utf-8", request=request)

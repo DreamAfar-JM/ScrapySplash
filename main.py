@@ -18,5 +18,6 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 #execute(["scrapy","crawl","wencai"])
 #execute(["scrapy","crawl","cnblog"])
 # execute(["scrapy","crawl","amazon","-s", "LOG_LEVEL=DEBUG", "-s", "JOBDIR=job_info/amazon"])
-execute(["scrapy","crawl","jd_all","-s", "LOG_LEVEL=DEBUG", "-s", "JOBDIR=job_info/jd_all"])
+# execute(["scrapy","crawl","jd_all","-s", "LOG_LEVEL=DEBUG", "-s", "JOBDIR=job_info/jd_all"])
+execute(["scrapy","crawl","aliexpress","-s", "LOG_LEVEL=DEBUG", "-s", "JOBDIR=job_info/aliexpress"])
 

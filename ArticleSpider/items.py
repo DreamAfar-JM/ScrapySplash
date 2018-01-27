@@ -725,3 +725,85 @@ class JDAllItem(scrapy.Item):
         comment_reply_time, append_comment, append_comment_time)
         print("return SQL 语句")
         return insert_sql, params
+
+
+class ALIExpressItem(scrapy.Item):
+    # 商品url
+    shop_url = scrapy.Field()
+    shop_cate_url = scrapy.Field()
+    shop_id = scrapy.Field()
+    owner_member_id = scrapy.Field()
+    shop_title = scrapy.Field()
+    brand = scrapy.Field()
+    store_url = scrapy.Field()
+    store_name = scrapy.Field()
+    store_address = scrapy.Field()
+    min_price = scrapy.Field()
+    max_price = scrapy.Field()
+    min_discount_price = scrapy.Field()
+    max_discount_price = scrapy.Field()
+    shop_info = scrapy.Field()
+    shop_star = scrapy.Field()
+    shop_comment_num = scrapy.Field()
+    order_num = scrapy.Field()
+    def get_insert_sql(self):
+        shop_url = self["shop_url"]
+        shop_cate_url = self["shop_cate_url"]
+        shop_id = self["shop_id"]
+        owner_member_id = self["owner_member_id"]
+        shop_title = self["shop_title"]
+        brand = self["brand"]
+        store_url = self["store_url"]
+        store_name = self["store_name"]
+        store_address = self["store_address"]
+        min_price = self["min_price"]
+        max_price = self["max_price"]
+        min_discount_price = self["min_discount_price"]
+        max_discount_price = self["max_discount_price"]
+        shop_info = self["shop_info"]
+        shop_star = self["shop_star"]
+        shop_comment_num = self["shop_comment_num"]
+        order_num = self["order"]
+
+        insert_sql = """
+                       insert into ALIExpress(shop_url,shop_cate_url,shop_id,owner_member_id,shop_title,brand,store_url,store_name,store_address,min_price,max_price,min_discount_price,max_discount_price,shop_info,shop_star,shop_comment_num,order_num)  VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
+                   """
+        params = (shop_url,shop_cate_url,shop_id,owner_member_id,shop_title,brand,store_url,store_name,store_address,min_price,max_price,min_discount_price,max_discount_price,shop_info,shop_star,shop_comment_num,order_num)
+        print("return 商品信息 SQL 语句")
+        return insert_sql, params
+
+class ALIExpressCommentItem(scrapy.Item):
+    shop_id = scrapy.Field()
+    member_id = scrapy.Field()
+    member_country = scrapy.Field()
+    comment_time = scrapy.Field()
+    order_info = scrapy.Field()
+    comment_text = scrapy.Field()
+    comment_thumpup = scrapy.Field()
+    append_comment = scrapy.Field()
+    append_comment_time = scrapy.Field()
+    replay_text = scrapy.Field()
+    replay_text_time = scrapy.Field()
+
+    def get_insert_sql(self):
+        shop_id = self['shop_id']
+        member_id = self['member_id']
+        member_country = self['member_country']
+        comment_time = self['comment_time']
+        order_info = self['order_info']
+        comment_text = self['comment_text']
+        comment_thumpup = self['comment_thumpup']
+        append_comment = self['append_comment']
+        append_comment_time = self['append_comment_time']
+        replay_text = self['replay_text']
+        replay_text_time = self['replay_text_time']
+        insert_sql = """
+                               insert into ALIExpressComment(shop_id,member_id,member_country,comment_time,order_info,comment_text,comment_thumpup,append_comment,append_comment_time,replay_text,replay_text_time)  VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
+                           """
+        params = (
+            shop_id, member_id, member_country, comment_time, order_info, comment_text, comment_thumpup, append_comment,
+            append_comment_time, replay_text, replay_text_time)
+        print("return 商品信息 SQL 语句")
+        return insert_sql, params
+
+
